@@ -39,7 +39,6 @@ const Layout = () => {
                     contentStyle: { backgroundColor: 'transparent' }
                 }}
             >
-                
                 <Stack.Screen name="(auth)" />
                 <Stack.Screen name="index" />
             </Stack>

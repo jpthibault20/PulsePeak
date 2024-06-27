@@ -27,15 +27,15 @@ export default function App() {
                         <View>
                             <CustomButton
                             title="Connexion"
-                            handlePress={() => router.push('/')}
+                            handlePress={() => router.push('/sign-in')}
                             containerStyles="bg-[#E8E8E8]" />
                         </View>
                         
                         <View>
                             <CustomButton
                             title="Inscription"
-                            handlePress={() => router.push('/')}
-                            containerStyles="bg-transparent border-2 border-white" 
+                            handlePress={() => router.push('/sign-up')}
+                            containerStyles="bg-[#309BC9] border-2 border-white" 
                             textStyles="text-white"/>
                         </View>
                     </View>
