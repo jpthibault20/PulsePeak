@@ -1,10 +1,10 @@
-import { SplashScreen, Stack } from "expo-router"
+import { SplashScreen, Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import { useEffect } from "react";
 
 SplashScreen.preventAutoHideAsync();
 
-const _layout = () => {
+const Layout = () => {
     const [fontsLoaded, error] = useFonts({
         "Montserrat-Black": require("../assets/fonts/Montserrat-Black.ttf"),
         "Montserrat-Bold": require("../assets/fonts/Montserrat-Bold.ttf"),
@@ -20,7 +20,6 @@ const _layout = () => {
 
     useEffect(() => {
         if (error) throw error;
-
         if (fontsLoaded) {
             SplashScreen.hideAsync();
         }
@@ -29,17 +28,22 @@ const _layout = () => {
     if (!fontsLoaded) {
         return null;
     }
-
     if (!fontsLoaded && !error) {
         return null;
     }
+
     return (
-        <Stack>
-            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-            <Stack.Screen name="index" options={{ headerShown: false }} />
-        </Stack>
-    )
+            <Stack
+                screenOptions={{
+                    headerShown: false,
+                    contentStyle: { backgroundColor: 'transparent' }
+                }}
+            >
+                
+                <Stack.Screen name="(auth)" />
+                <Stack.Screen name="index" />
+            </Stack>
+    );
 }
 
-export default _layout
-
+export default Layout;
