@@ -38,7 +38,7 @@ const SignIn = () => {
             <View className="justify-end items-end mt-3 mr-3">
               <CustomLink
                 titleLink="Mot de passe oublié ?"
-                link="/forgot-password"
+                link="/home"
               />
             </View>
             <View>
