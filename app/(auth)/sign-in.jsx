@@ -64,17 +64,7 @@ const SignIn = () => {
               link="/sign-up"
             />
           </View>
-        </View>
-
-        <View className="justify-end items-end h-full">
-        <CustomLink
-          title1={"Pas de compte ? "}
-          titleLink="Inscrivez vous"
-          link="/sign-up"
-        />
-      </View>
-
-      
+        </View>      
     </GradientBackground>
   )
 }
