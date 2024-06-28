@@ -1,16 +1,32 @@
 import React, { useState } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, Alert } from 'react-native'
 import { GradientBackground } from "../../components/auth/GradientBackground"
 import { FormField } from '../../components/auth/FormField'
 import { CustomLink } from '../../components/CustomLink'
 import { CustomButton } from "../../components/customButton"
 import { OAuthButton } from "../../components/auth/OAuthButton"
+import { supabase } from '../../lib/supabase'
 
 const SignUp = () => {
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
-  });
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false)
+  
+  async function signUpWithEmail() {
+    setLoading(true)
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.signUp({
+      email: form.email,
+      password: form.password,
+    })
+
+    if (error) Alert.alert(error.message)
+    if (!session) Alert.alert('Please check your inbox for email verification!')
+    setLoading(false)
+  }
+
+
   return (
     <GradientBackground>
         <View className="w-full h-full justify-center items-center space-y-10">
@@ -35,18 +51,12 @@ const SignUp = () => {
               otherStyles="mt-6"
               placeholder="Mot de passe"
             />
-            <FormField
-              title="Password"
-              value={form.password}
-              handleChangeText={(e) => setForm({ ...form, password: e })}
-              otherStyles="mt-6"
-              placeholder="Confirmation du mot de passe"
-            />
             <View>
               <CustomButton
                 title="S'enregistrer"
-                onPress={() => console.log("Se connecter")}
+                handlePress={() => signUpWithEmail()}
                 containerStyles="mt-14 bg-[#E8E8E8]"
+                isLoading={loading}
               />
             </View>
           </View>

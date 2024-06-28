@@ -11,6 +11,8 @@ const SignIn = () => {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
+
   return (
     <GradientBackground>
         <View className="w-full h-full justify-center items-center space-y-10">
