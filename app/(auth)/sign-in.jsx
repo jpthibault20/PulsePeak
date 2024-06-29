@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Text, Alert } from 'react-native'
 import { GradientBackground } from "../../components/auth/GradientBackground"
 import { FormField } from '../../components/auth/FormField'
@@ -6,7 +6,8 @@ import { CustomLink } from '../../components/CustomLink'
 import { CustomButton } from "../../components/customButton"
 import { OAuthButton } from "../../components/auth/OAuthButton"
 import { supabase } from '../../lib/supabase'
-import { Redirect, router } from "expo-router"
+import { router } from "expo-router"
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignIn = () => {
   const [form, setForm] = useState({
@@ -14,11 +15,25 @@ const SignIn = () => {
     password: "",
   });
   const [loading, setLoading] = useState(false);
+  const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    if (session) {
+      AsyncStorage.setItem('authToken', session.access_token)
+        .then(() => {
+          router.replace("/home");
+        })
+        .catch((error) => {
+          console.error('Erreur lors de la sauvegarde du token:', error);
+        });
+    }
+  }, [session]);
+
 
   async function signInWithEmail() {
-
     setLoading(true)
-    const { error } = await supabase.auth.signInWithPassword({
+
+    const { data, error } = await supabase.auth.signInWithPassword({
       email: form.email,
       password: form.password,
     })
@@ -28,8 +43,11 @@ const SignIn = () => {
       setLoading(false)
       return
     }
-    Alert.alert("connected")
-    router.push("/home")
+
+    if (data.session) {
+      setSession(data.session);
+    }
+
     setLoading(false)
   }
 
