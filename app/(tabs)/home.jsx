@@ -59,7 +59,10 @@ const home = () => {
                 />
                 <View>
                     <View>
-                        <Text>Session_id : {session_id}</Text>
+                        <Text>id : {user ? user.id : ''}</Text>
+                    </View>
+                    <View>
+                        <Text>Session_id : {user ? user.session_id : ''}</Text>
                     </View>
                     <View>
                         <Text>firstname : {user ? user.firstName : ''}</Text>

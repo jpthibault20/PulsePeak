@@ -1,23 +1,34 @@
 import { View, Text } from 'react-native'
 import { Stack } from 'expo-router'
+import { AuthProvider } from '../../context/AuthContext'
+
 
 const AuthLayout = () => {
     return (
-        <Stack>
-            <Stack.Screen
-                name='sign-in'
-                options={{
-                    headerShown: false
-                }}
-            />
+        <AuthProvider>
+            <Stack>
+                <Stack.Screen
+                    name='sign-in'
+                    options={{
+                        headerShown: false
+                    }}
+                />
 
-            <Stack.Screen
-                name='sign-up'
-                options={{
-                    headerShown: false
-                }}
-            /> 
-        </Stack>
+                <Stack.Screen
+                    name='sign-up'
+                    options={{
+                        headerShown: false
+                    }}
+                />
+
+                <Stack.Screen
+                    name='sign-up_name'
+                    options={{
+                        headerShown: false
+                    }}
+                />
+            </Stack>
+        </AuthProvider>
     );
 }
 
