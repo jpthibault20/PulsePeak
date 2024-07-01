@@ -22,6 +22,14 @@ const home = () => {
                     containerStyles={"bg-white mt-10"}
                 />
             </View>
+            <View>
+                <View>
+                    <Text>firstname : { }</Text>
+                </View>
+                <View>
+                    <Text>lastname : { }</Text>
+                </View>
+            </View>
         </ GradientBackground>
     )
 }
