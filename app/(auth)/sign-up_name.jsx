@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { GradientBackground } from "../../components/auth/GradientBackground";
 import { useRouter } from 'expo-router';
-import { ChevronLeft } from "../../assets/icons/svg/chevron-left";
+import { ChevronLeft } from "../../assets/icons/svg/Chevronleft";
 import { ProgressBar1 } from "../../assets/icons/svg/Progressebar1";
 import { PassportId } from "../../assets/images/svg/PassportId";
 import { FormField } from '../../components/auth/FormField';
@@ -31,7 +31,7 @@ export default function SignUpName() {
 
     const nextbutton = () => {
         console.log(authState);
-        // router.push('/sign-up');
+        router.push('/sign-up_moreInformation');
     }
 
     return (
