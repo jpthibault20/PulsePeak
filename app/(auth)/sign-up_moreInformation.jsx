@@ -16,7 +16,7 @@ import { ChevronLeft } from "../../assets/icons/svg/Chevronleft";
 import { CustomButton } from "../../components/customButton";
 import { CustomLink } from '../../components/CustomLink';
 import AuthContext from '../../context/AuthContext';
-import { ProgressBar2 } from '../../assets/icons/svg/Progressebar2';
+import { ProgressBar2 } from '../../assets/icons/svg/ProgressBar2';
 import { HumanSymbole } from '../../components/HumanSymbole';
 import InputDash from '../../components/InputDash';
 
@@ -44,13 +44,7 @@ export default function SignUpMoreInformation() {
             weight: weight
         }));
 
-        console.log("gender:", gender);
-        console.log("height:", height);
-        console.log("weight:", weight);
-        console.log(authState);
-
-
-        // router.push('/sign-up');
+        router.push('/sign-up_coach');
     }
 
     return (
@@ -125,7 +119,55 @@ export default function SignUpMoreInformation() {
                                     titleLink="Connexion"
                                     link="/sign-in"
                                 />
+                            </View><View className="w-full items-center">
+                                <CustomButton
+                                    title="Ignorer"
+                                    handlePress={() => nextbutton()}
+                                    containerStyles="mt-14 bg-[#1D4F68]"
+                                    textStyles="text-white"
+                                    isLoading={loading}
+                                />
+                                <CustomButton
+                                    title="Suivant"
+                                    handlePress={() => nextbutton()}
+                                    containerStyles="mt-4 bg-[#E8E8E8]"
+                                    isLoading={loading}
+                                />
                             </View>
+                            <View className="w-full items-center my-4 mt-16">
+                                <CustomLink
+                                    title1="Vous avez déjà un compte ? "
+                                    titleLink="Connexion"
+                                    link="/sign-in"
+                                />
+                            </View>
+
+                            <View>
+                                <View className="w-full items-center">
+                                    <CustomButton
+                                        title="Ignorer"
+                                        handlePress={() => nextbutton()}
+                                        containerStyles="mt-14 bg-[#1D4F68]"
+                                        textStyles="text-white"
+                                        isLoading={loading}
+                                    />
+                                    <CustomButton
+                                        title="Suivant"
+                                        handlePress={() => nextbutton()}
+                                        containerStyles="mt-4 bg-[#E8E8E8]"
+                                        isLoading={loading}
+                                    />
+                                </View>
+                                <View className="w-full items-center my-4">
+                                    <CustomLink
+                                        title1="Vous avez déjà un compte ? "
+                                        titleLink="Connexion"
+                                        link="/sign-in"
+                                    />
+                                </View>
+                            </View>
+
+
                         </ScrollView>
                     </TouchableWithoutFeedback>
                 </KeyboardAvoidingView>

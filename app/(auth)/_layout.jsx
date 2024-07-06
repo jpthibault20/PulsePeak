@@ -34,6 +34,18 @@ const AuthLayout = () => {
                         headerShown: false
                     }}
                 />
+                <Stack.Screen
+                    name='sign-up_coach'
+                    options={{
+                        headerShown: false
+                    }}
+                />
+                <Stack.Screen
+                    name='sign-up_goals'
+                    options={{
+                        headerShown: false
+                    }}
+                />
             </Stack>
         </AuthProvider>
     );

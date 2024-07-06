@@ -11,7 +11,11 @@ export const AuthProvider = ({ children }) => {
     gender: "", 
     height: "", 
     weight: "", 
-    coach_mode: "" 
+    coach_mode: "",
+    goal: "",
+    sport: "",
+    distance: "",
+    goal_type: ""
   });
 
   return (

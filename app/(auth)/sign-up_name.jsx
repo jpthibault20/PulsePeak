@@ -13,7 +13,7 @@ import {
 import { GradientBackground } from "../../components/auth/GradientBackground";
 import { useRouter } from 'expo-router';
 import { ChevronLeft } from "../../assets/icons/svg/Chevronleft";
-import { ProgressBar1 } from "../../assets/icons/svg/Progressebar1";
+import { ProgressBar1 } from "../../assets/icons/svg/ProgressBar1";
 import { PassportId } from "../../assets/images/svg/PassportId";
 import { FormField } from '../../components/auth/FormField';
 import { CustomButton } from "../../components/customButton";
@@ -30,7 +30,6 @@ export default function SignUpName() {
     }
 
     const nextbutton = () => {
-        console.log(authState);
         router.push('/sign-up_moreInformation');
     }
 
@@ -65,18 +64,18 @@ export default function SignUpName() {
                             </View>
                             <View className="w-full justify-center items-center">
                                 <FormField
-                                    title="lastname"
-                                    value={authState.lastname}
-                                    handleChangeText={(e) => setAuthState({ ...authState, lastname: e })}
-                                    otherStyles=""
-                                    placeholder="Nom"
-                                />
-                                <FormField
                                     title="firstname"
                                     value={authState.firstname}
                                     handleChangeText={(e) => setAuthState({ ...authState, firstname: e })}
-                                    otherStyles="mt-6"
+                                    otherStyles=""
                                     placeholder="Prenom"
+                                />
+                                <FormField
+                                    title="lastname"
+                                    value={authState.lastname}
+                                    handleChangeText={(e) => setAuthState({ ...authState, lastname: e })}
+                                    otherStyles="mt-6"
+                                    placeholder="Nom"
                                 />
                             </View>
                             <View className="w-full items-center">
