@@ -27,7 +27,7 @@ export default function SignUpMoreInformation() {
     const [malePressed, setMalePressed] = useState(false)
     const [femalePressed, setFemalePressed] = useState(false)
     const [height, setHeight] = useState("")
-    const [weight, setWeight] = useState("")
+    const [wight, setWight] = useState("")
 
     const backbutton = () => {
         router.back();
@@ -41,7 +41,7 @@ export default function SignUpMoreInformation() {
             ...prevState,
             gender: gender,
             height: height,
-            weight: weight
+            wight: wight
         }));
 
         router.push('/sign-up_coach');
@@ -53,119 +53,92 @@ export default function SignUpMoreInformation() {
                 <KeyboardAvoidingView
                     behavior={Platform.OS === "ios" ? "padding" : "height"}
                     className="flex-1"
+                    keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20}
                 >
                     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                        <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'start' }}>
-                            <View className="w-full h-[90px] flex-row items-center">
+                        <ScrollView contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps="handled">
+                            <View className="flex-1 justify-between min-h-full">
+                                {/* Header */}
+                                <View className="w-full h-[90px] flex-row items-center">
+                                    <View>
+                                        <TouchableOpacity onPress={backbutton}>
+                                            <ChevronLeft height={50} width={50} />
+                                        </TouchableOpacity>
+                                    </View>
+                                    <View className="ml-8">
+                                        <ProgressBar2 height={15} width={250} />
+                                    </View>
+                                </View>
+
+                                {/* Page content */}
                                 <View>
-                                    <TouchableOpacity onPress={backbutton}>
-                                        <ChevronLeft height={50} width={50} />
-                                    </TouchableOpacity>
+                                    <View className="w-full justify-center items-center px-4">
+                                        <Text className="font-mregular text-white text-2xl text-center">
+                                            Nous avons besoin d'un peu
+                                            <Text className="font-mbold"> plus d'informations</Text>
+                                        </Text>
+                                    </View>
+
+                                    <View className="w-full justify-center mt-6">
+                                        <Text className="text-white font-mregular text-lg ml-6">Sexe</Text>
+                                        <View className="flex-row items-center justify-center">
+                                            <HumanSymbole
+                                                sexe="Male"
+                                                otherStyles={"mr-6"}
+                                                setFemalePressed={setFemalePressed}
+                                                setMalePressed={setMalePressed}
+                                                femalePressed={femalePressed}
+                                                malePressed={malePressed}
+                                            />
+                                            <Text className="text-white font-mregular text-lg">OU</Text>
+                                            <HumanSymbole
+                                                sexe="Female"
+                                                otherStyles={"ml-6"}
+                                                setFemalePressed={setFemalePressed}
+                                                setMalePressed={setMalePressed}
+                                                femalePressed={femalePressed}
+                                                malePressed={malePressed}
+                                            />
+                                        </View>
+                                    </View>
+                                    <InputDash title={"wight"} setWight={setWight} />
+                                    <InputDash title={"height"} setHeight={setHeight} />
                                 </View>
-                                <View className="ml-8">
-                                    <ProgressBar2 height={15} width={250} />
+
+                                {/* Footer */}
+                                <View className="w-full items-center space-y-4">
+                                    <View>
+                                        <CustomButton
+                                            title="Ignorer"
+                                            handlePress={() => nextbutton()}
+                                            containerStyles="bg-[#1D4F68]"
+                                            textStyles="text-white"
+                                            isLoading={loading}
+                                        />
+                                    </View>
+                                    <View>
+                                        <CustomButton
+                                            title="Suivant"
+                                            handlePress={() => nextbutton()}
+                                            containerStyles="bg-[#E8E8E8]"
+                                            isLoading={loading}
+                                        />
+                                    </View>
+                                    <View className="w-full items-center mb-10">
+                                        <CustomLink
+                                            title1="Vous avez déjà un compte ? "
+                                            titleLink="Connexion"
+                                            link="/sign-in"
+                                        />
+                                    </View>
                                 </View>
-                            </View>
-                            <View className="w-full justify-center items-center mb">
-                                <Text className="font-mregular text-white text-2xl text-center">
-                                    Nous avons besoin d'un peu
-                                    <Text className="font-mbold"> plus d'informations</Text>
-                                </Text>
                             </View>
 
-                            <View className="w-full justify-center mt-6">
-                                <Text className="text-white font-mregular text-lg ml-6">Sexe</Text>
-                                <View className="flex-row items-center justify-center">
-                                    <HumanSymbole
-                                        sexe="Male"
-                                        otherStyles={"mr-6"}
-                                        setFemalePressed={setFemalePressed}
-                                        setMalePressed={setMalePressed}
-                                        femalePressed={femalePressed}
-                                        malePressed={malePressed}
-                                    />
-                                    <Text className="text-white font-mregular text-lg">OU</Text>
-                                    <HumanSymbole
-                                        sexe="Female"
-                                        otherStyles={"ml-6"}
-                                        setFemalePressed={setFemalePressed}
-                                        setMalePressed={setMalePressed}
-                                        femalePressed={femalePressed}
-                                        malePressed={malePressed}
-                                    />
-                                </View>
-                            </View>
-                            <InputDash title={"weight"} setWeight={setWeight} />
-                            <InputDash title={"height"} setHeight={setHeight} />
 
-                            <View className="w-full items-center">
-                                <CustomButton
-                                    title="Ignorer"
-                                    handlePress={() => nextbutton()}
-                                    containerStyles="mt-14 bg-[#1D4F68]"
-                                    textStyles="text-white"
-                                    isLoading={loading}
-                                />
-                                <CustomButton
-                                    title="Suivant"
-                                    handlePress={() => nextbutton()}
-                                    containerStyles="mt-4 bg-[#E8E8E8]"
-                                    isLoading={loading}
-                                />
-                            </View>
-                            <View className="w-full items-center my-4 mt-16">
-                                <CustomLink
-                                    title1="Vous avez déjà un compte ? "
-                                    titleLink="Connexion"
-                                    link="/sign-in"
-                                />
-                            </View><View className="w-full items-center">
-                                <CustomButton
-                                    title="Ignorer"
-                                    handlePress={() => nextbutton()}
-                                    containerStyles="mt-14 bg-[#1D4F68]"
-                                    textStyles="text-white"
-                                    isLoading={loading}
-                                />
-                                <CustomButton
-                                    title="Suivant"
-                                    handlePress={() => nextbutton()}
-                                    containerStyles="mt-4 bg-[#E8E8E8]"
-                                    isLoading={loading}
-                                />
-                            </View>
-                            <View className="w-full items-center my-4 mt-16">
-                                <CustomLink
-                                    title1="Vous avez déjà un compte ? "
-                                    titleLink="Connexion"
-                                    link="/sign-in"
-                                />
-                            </View>
 
-                            <View>
-                                <View className="w-full items-center">
-                                    <CustomButton
-                                        title="Ignorer"
-                                        handlePress={() => nextbutton()}
-                                        containerStyles="mt-14 bg-[#1D4F68]"
-                                        textStyles="text-white"
-                                        isLoading={loading}
-                                    />
-                                    <CustomButton
-                                        title="Suivant"
-                                        handlePress={() => nextbutton()}
-                                        containerStyles="mt-4 bg-[#E8E8E8]"
-                                        isLoading={loading}
-                                    />
-                                </View>
-                                <View className="w-full items-center my-4">
-                                    <CustomLink
-                                        title1="Vous avez déjà un compte ? "
-                                        titleLink="Connexion"
-                                        link="/sign-in"
-                                    />
-                                </View>
-                            </View>
+
+
+
 
 
                         </ScrollView>

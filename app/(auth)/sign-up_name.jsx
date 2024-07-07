@@ -39,59 +39,71 @@ export default function SignUpName() {
                 <KeyboardAvoidingView
                     behavior={Platform.OS === "ios" ? "padding" : "height"}
                     className="flex-1"
+                    keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20}
                 >
                     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                        <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}>
-                            <View className="w-full h-[90px] flex-row items-center">
-                                <View>
+                        <ScrollView
+                            contentContainerStyle={{ flexGrow: 1 }}
+                            keyboardShouldPersistTaps="handled"
+                        >
+                            <View className="flex-1 justify-between min-h-full">
+                                {/* Header */}
+                                <View className="w-full h-[90px] flex-row items-center">
                                     <TouchableOpacity onPress={backbutton}>
                                         <ChevronLeft height={50} width={50} />
                                     </TouchableOpacity>
+                                    <View className="ml-8">
+                                        <ProgressBar1 height={15} width={250} />
+                                    </View>
                                 </View>
-                                <View className="ml-8">
-                                    <ProgressBar1 height={15} width={250} />
+
+                                {/* Page content */}
+                                <View className="flex-1 justify-center px-4">
+                                    <View className="w-full justify-center items-center">
+                                        <Text className="font-mregular text-white text-3xl text-center">
+                                            Comment doit-on vous
+                                            <Text className="font-mbold"> appeler</Text>
+                                            {" "}?
+                                        </Text>
+                                    </View>
+                                    <View className="w-full justify-center items-center my-8">
+                                        <PassportId height={200} width={200} />
+                                    </View>
+                                    <View className="w-full justify-center items-center">
+                                        <FormField
+                                            title="firstname"
+                                            value={authState.firstname}
+                                            handleChangeText={(e) => setAuthState({ ...authState, firstname: e })}
+                                            otherStyles=""
+                                            placeholder="Prenom"
+                                        />
+                                        <FormField
+                                            title="lastname"
+                                            value={authState.lastname}
+                                            handleChangeText={(e) => setAuthState({ ...authState, lastname: e })}
+                                            otherStyles="mt-6"
+                                            placeholder="Nom"
+                                        />
+                                    </View>
                                 </View>
-                            </View>
-                            <View className="w-full justify-center items-center">
-                                <Text className="font-mregular text-white text-3xl text-center">
-                                    Comment doit-on vous
-                                    <Text className="font-mbold"> appeler</Text>
-                                    {" "}?
-                                </Text>
-                            </View>
-                            <View className="w-full justify-center items-center">
-                                <PassportId height={300} width={300} />
-                            </View>
-                            <View className="w-full justify-center items-center">
-                                <FormField
-                                    title="firstname"
-                                    value={authState.firstname}
-                                    handleChangeText={(e) => setAuthState({ ...authState, firstname: e })}
-                                    otherStyles=""
-                                    placeholder="Prenom"
-                                />
-                                <FormField
-                                    title="lastname"
-                                    value={authState.lastname}
-                                    handleChangeText={(e) => setAuthState({ ...authState, lastname: e })}
-                                    otherStyles="mt-6"
-                                    placeholder="Nom"
-                                />
-                            </View>
-                            <View className="w-full items-center">
-                                <CustomButton
-                                    title="Suivant"
-                                    handlePress={() => nextbutton()}
-                                    containerStyles="mt-14 bg-[#E8E8E8]"
-                                    isLoading={loading}
-                                />
-                            </View>
-                            <View className="w-full items-center my-4">
-                                <CustomLink
-                                    title1="Vous avez déjà un compte ? "
-                                    titleLink="Connexion"
-                                    link="/sign-in"
-                                />
+
+                                {/* Footer */}
+                                <View className="w-full items-center space-y-6 mb-10">
+                                    <CustomButton
+                                        title="Suivant"
+                                        handlePress={() => nextbutton()}
+                                        containerStyles=" bg-[#E8E8E8]"
+                                        isLoading={loading}
+                                    />
+                                    <View>
+                                        <CustomLink
+                                            title1="Vous avez déjà un compte ? "
+                                            titleLink="Connexion"
+                                            link="/sign-in"
+                                            containerStyles=""
+                                        />
+                                    </View>
+                                </View>
                             </View>
                         </ScrollView>
                     </TouchableWithoutFeedback>

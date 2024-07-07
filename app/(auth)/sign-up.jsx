@@ -7,7 +7,8 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Platform,
-  ScrollView
+  ScrollView,
+  SafeAreaView
 } from 'react-native';
 import { GradientBackground } from "../../components/auth/GradientBackground";
 import { FormField } from '../../components/auth/FormField';
@@ -41,52 +42,64 @@ const SignUp = () => {
 
   return (
     <GradientBackground>
+      <SafeAreaView className="flex-1">
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         className="flex-1"
+        keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}>
-            <View className="w-full h-full justify-center items-center space-y-10">
-              <View className="mx-5">
-                <Text className="text-white font-mregular text-3xl text-center">
-                  <Text className="font-mbold">Créer un compte </Text>
-                  pour commencer !
-                </Text>
-              </View>
-              <View>
-                <FormField
-                  title="Email"
-                  value={authState.email}
-                  handleChangeText={(e) => setAuthState({ ...authState, email: e })}
-                  otherStyles="mt-6"
-                  placeholder="Adresse mail"
-                />
-                <FormField
-                  title="Password"
-                  value={authState.password}
-                  handleChangeText={(e) => setAuthState({ ...authState, password: e })}
-                  otherStyles="mt-6"
-                  placeholder="Mot de passe"
-                />
+          <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'handled' }}>
+            <View className="flex-1 justify-between min-h-full">
+
+              {/* Header */}
+              <View></View>
+
+              {/* Content page */}
+              <View className="w-full justify-center items-center space-y-10">
+                <View className="mx-5">
+                  <Text className="text-white font-mregular text-3xl text-center">
+                    <Text className="font-mbold">Créer un compte </Text>
+                    pour commencer !
+                  </Text>
+                </View>
                 <View>
-                  <CustomButton
-                    title="S'enregistrer"
-                    handlePress={() => signUpWithEmail()}
-                    containerStyles="mt-14 bg-[#E8E8E8]"
-                    isLoading={loading}
+                  <FormField
+                    title="Email"
+                    value={authState.mail}
+                    handleChangeText={(e) => setAuthState({ ...authState, mail: e })}
+                    otherStyles="mt-6"
+                    placeholder="Adresse mail"
                   />
+                  <FormField
+                    title="Password"
+                    value={authState.password}
+                    handleChangeText={(e) => setAuthState({ ...authState, password: e })}
+                    otherStyles="mt-6"
+                    placeholder="Mot de passe"
+                  />
+                  <View>
+                    <CustomButton
+                      title="S'enregistrer"
+                      handlePress={() => signUpWithEmail()}
+                      containerStyles="mt-14 bg-[#E8E8E8]"
+                      isLoading={loading}
+                    />
+                  </View>
+                </View>
+                <View className="flex-row items-center mx-10">
+                  <View className="flex-1 h-px bg-white"></View>
+                  <Text className="font-medium text-white mx-3">S'inscrire avec</Text>
+                  <View className="flex-1 h-px bg-white"></View>
+                </View>
+                <View className="w-full">
+                  <OAuthButton />
                 </View>
               </View>
-              <View className="flex-row items-center mx-10">
-                <View className="flex-1 h-px bg-white"></View>
-                <Text className="font-medium text-white mx-3">S'inscrire avec</Text>
-                <View className="flex-1 h-px bg-white"></View>
-              </View>
-              <View className="w-full">
-                <OAuthButton />
-              </View>
-              <View>
+
+
+              {/* Footer */}
+              <View className="w-full justify-center items-center mb-10">
                 <CustomLink
                   title1="Vous avez déjà un compte ? "
                   titleLink="Connexion"
@@ -97,6 +110,7 @@ const SignUp = () => {
           </ScrollView>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
+      </SafeAreaView>
     </GradientBackground>
   );
 };

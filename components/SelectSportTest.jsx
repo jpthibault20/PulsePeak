@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Modal, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, Modal, ScrollView, StyleSheet } from 'react-native';
 
 export const SelectSportTest = () => {
     const [selectedSports, setSelectedSports] = useState([]);
@@ -35,13 +35,13 @@ export const SelectSportTest = () => {
             </TouchableOpacity>
 
             <Modal
-                animationType="slide"
+                animationType="fade"
                 transparent={true}
                 visible={modalVisible}
                 onRequestClose={() => setModalVisible(false)}
             >
-                <View className="flex-1 justify-center items-center bg-black bg-opacity-50">
-                    <View className="bg-white rounded p-4 w-3/4">
+                <View style={styles.overlay} className="flex-1 justify-center items-center">
+                    <View style={styles.modalView} className="rounded-lg p-4 w-3/4">
                         <ScrollView>
                             {sports.map((sport) => (
                                 <TouchableOpacity
@@ -66,3 +66,25 @@ export const SelectSportTest = () => {
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    overlay: {
+        flex: 1,
+        backgroundColor: 'rgba(255, 255, 255, 0.65)',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    modalView: {
+        backgroundColor: 'white',
+        borderRadius: 10,
+        padding: 20,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+});
