@@ -9,13 +9,13 @@ export const AuthProvider = ({ children }) => {
     lastname: "", 
     firstname: "", 
     gender: "", 
-    height: "", 
-    wight: "", 
+    hight: "", 
+    weight: "",
     coach_mode: "",
     goal: "",
     sport: "",
     distance: "",
-    goal_type: ""
+    type: ""
   });
 
   return (

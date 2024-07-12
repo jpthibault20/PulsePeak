@@ -16,7 +16,7 @@ import { ChevronLeft } from "../../assets/icons/svg/Chevronleft";
 import { CustomButton } from "../../components/customButton";
 import { CustomLink } from '../../components/CustomLink';
 import AuthContext from '../../context/AuthContext';
-import { ProgressBar2 } from '../../assets/icons/svg/ProgressBar2';
+import { ProgressBar } from '../../assets/icons/svg/ProgressBar';
 import { HumanSymbole } from '../../components/HumanSymbole';
 import InputDash from '../../components/InputDash';
 
@@ -26,8 +26,8 @@ export default function SignUpMoreInformation() {
     const { authState, setAuthState } = useContext(AuthContext);
     const [malePressed, setMalePressed] = useState(false)
     const [femalePressed, setFemalePressed] = useState(false)
-    const [height, setHeight] = useState("")
-    const [wight, setWight] = useState("")
+    const [hight, setHight] = useState("")
+    const [weight, setWeight] = useState("")
 
     const backbutton = () => {
         router.back();
@@ -40,8 +40,8 @@ export default function SignUpMoreInformation() {
         setAuthState((prevState) => ({
             ...prevState,
             gender: gender,
-            height: height,
-            wight: wight
+            hight: hight,
+            weight: weight
         }));
 
         router.push('/sign-up_coach');
@@ -51,7 +51,7 @@ export default function SignUpMoreInformation() {
         <GradientBackground>
             <SafeAreaView className="flex-1">
                 <KeyboardAvoidingView
-                    behavior={Platform.OS === "ios" ? "padding" : "height"}
+                    behavior={Platform.OS === "ios" ? "padding" : "hight"}
                     className="flex-1"
                     keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20}
                 >
@@ -62,11 +62,11 @@ export default function SignUpMoreInformation() {
                                 <View className="w-full h-[90px] flex-row items-center">
                                     <View>
                                         <TouchableOpacity onPress={backbutton}>
-                                            <ChevronLeft height={50} width={50} />
+                                            <ChevronLeft hight={50} width={50} />
                                         </TouchableOpacity>
                                     </View>
                                     <View className="ml-8">
-                                        <ProgressBar2 height={15} width={250} />
+                                        <ProgressBar hight={15} width={250} percentage={40}/>
                                     </View>
                                 </View>
 
@@ -101,8 +101,8 @@ export default function SignUpMoreInformation() {
                                             />
                                         </View>
                                     </View>
-                                    <InputDash title={"wight"} setWight={setWight} />
-                                    <InputDash title={"height"} setHeight={setHeight} />
+                                    <InputDash title={"weight"} setstate={setWeight} />
+                                    <InputDash title={"hight"} setstate={setHight} />
                                 </View>
 
                                 {/* Footer */}
@@ -133,14 +133,6 @@ export default function SignUpMoreInformation() {
                                     </View>
                                 </View>
                             </View>
-
-
-
-
-
-
-
-
                         </ScrollView>
                     </TouchableWithoutFeedback>
                 </KeyboardAvoidingView>

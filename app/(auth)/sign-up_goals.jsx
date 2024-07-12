@@ -16,22 +16,60 @@ import { ChevronLeft } from "../../assets/icons/svg/Chevronleft";
 import { CustomButton } from "../../components/customButton";
 import { CustomLink } from '../../components/CustomLink';
 import AuthContext from '../../context/AuthContext';
-import { ProgressBar4 } from '../../assets/icons/svg/ProgressBar4';
-import { SelectSportTest } from '../../components/SelectSportTest';
+import { ProgressBar } from '../../assets/icons/svg/ProgressBar';
+import { CustomRollingList } from '../../components/CustomRollingList';
 
 export default function SignUpGoals() {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
+    const [goalsState, setGoalsState] = useState("");
+    const [sportsState, setSportsState] = useState("");
+    const [distanceState, setDistanceState] = useState("");
+    const [typeState, setTypeState] = useState("");
     const { authState, setAuthState } = useContext(AuthContext);
 
+    const goals = [
+        { label: 'Performance', value: 'P' },
+        { label: 'Bien-être', value: 'B' },
+    ];
+
+    const sports = [
+        { label: 'Vélo', value: 'V' },
+        { label: 'Course à pied', value: 'C' },
+        { label: 'Natation', value: 'N' },
+        { label: 'Vélo, Course à pied', value: 'VC' },
+        { label: 'Vélo, Natation', value: 'VN' },
+        { label: 'Course à pied, Natation', value: 'CN' },
+        { label: 'Vélo, Course à pied, Natation', value: 'VCN' },
+    ];
+
+    const distance = Array.from({ length: 301 }, (_, i) => ({ label: `${i} km`, value: i }));
+
+    const type = [
+        { label: 'plat', value: 'Pl' },
+        { label: 'Vallonée', value: 'V' },
+        { label: 'Montagneux', value: 'M' },
+        { label: 'Piscine', value: 'Pi' },
+        { label: 'Eau libre', value: 'El' },
+
+    ];
 
     const backbutton = () => {
         router.back();
     }
 
+    const skipbutton = () => {
+    }
+
     const nextbutton = () => {
-        console.log(authState);
-        // router.push('/sign-up');
+        setAuthState((prevState) => ({
+            ...prevState,
+            goal: goalsState,
+            sport: sportsState,
+            distance: distanceState,
+            type: typeState
+        }));
+        router.push('/sign-up_date');
     }
 
     return (
@@ -53,12 +91,12 @@ export default function SignUpGoals() {
                                         </TouchableOpacity>
                                     </View>
                                     <View className="ml-8">
-                                        <ProgressBar4 height={15} width={250} />
+                                        <ProgressBar height={15} width={250} percentage={80}/>
                                     </View>
                                 </View>
 
                                 {/* Page content */}
-                                <View className="w-full space-y-10">
+                                <View className="w-full space-y-6">
                                     <View className="w-full justify-center items-center">
                                         <Text className="font-mregular text-white text-2xl text-center">
                                             Quels sont vos
@@ -68,16 +106,43 @@ export default function SignUpGoals() {
                                     </View>
 
                                     <View>
-                                        <SelectSportTest />
+                                        <CustomRollingList
+                                            title="Objectif"
+                                            placeholder={'Votre objectif'}
+                                            data={goals}
+                                            setstate={setGoalsState}
+                                            state={goalsState}
+                                        />
+                                        <CustomRollingList
+                                            title="Sport"
+                                            placeholder={'Votre sport'}
+                                            data={sports}
+                                            setstate={setSportsState}
+                                            state={sportsState}
+                                        />
+                                        <CustomRollingList
+                                            title="Distance"
+                                            placeholder={"Distance de l'objectif"}
+                                            data={distance}
+                                            setstate={setDistanceState}
+                                            state={distanceState}
+                                        />
+                                        <CustomRollingList
+                                            title="Type"
+                                            placeholder={"Type"}
+                                            data={type}
+                                            setstate={setTypeState}
+                                            state={typeState}
+                                        />
                                     </View>
                                 </View>
-                                
+
                                 {/* Footer */}
                                 <View>
                                     <View className="w-full items-center">
                                         <CustomButton
                                             title="Ignorer"
-                                            handlePress={() => nextbutton()}
+                                            handlePress={() => skipbutton()}
                                             containerStyles="bg-[#1D4F68]"
                                             textStyles="text-white"
                                             isLoading={loading}
@@ -99,15 +164,6 @@ export default function SignUpGoals() {
                                     </View>
                                 </View>
                             </View>
-
-
-
-
-
-
-
-
-
                         </ScrollView>
                     </TouchableWithoutFeedback>
                 </KeyboardAvoidingView>

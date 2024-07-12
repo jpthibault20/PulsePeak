@@ -46,6 +46,12 @@ const AuthLayout = () => {
                         headerShown: false
                     }}
                 />
+                <Stack.Screen
+                    name='sign-up_date'
+                    options={{
+                        headerShown: false
+                    }}
+                />
             </Stack>
         </AuthProvider>
     );

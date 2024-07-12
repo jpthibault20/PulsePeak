@@ -1,15 +1,10 @@
 import React from 'react';
 import { View, Text, TextInput } from 'react-native';
 
-export default function InputDash({ title, otherStylescontainer, otherStylesTitle, setHeight, setWeight }) {
+export default function InputDash({ title, otherStylescontainer, otherStylesTitle, setstate }) {
 
     const onPressValues = (e) => {
-        if (title === "weight") {
-            setWeight(e)
-        }
-        else if (title === "height") {
-            setHeight(e)
-        }
+        setstate(e)
     }
 
     return (

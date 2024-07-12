@@ -16,7 +16,7 @@ import { ChevronLeft } from "../../assets/icons/svg/Chevronleft";
 import { CustomButton } from "../../components/customButton";
 import { CustomLink } from '../../components/CustomLink';
 import AuthContext from '../../context/AuthContext';
-import { ProgressBar3 } from '../../assets/icons/svg/ProgressBar3';
+import { ProgressBar } from '../../assets/icons/svg/ProgressBar';
 
 export default function SignUpCoach() {
     const [loading, setLoading] = useState(false);
@@ -69,7 +69,7 @@ export default function SignUpCoach() {
                                         </TouchableOpacity>
                                     </View>
                                     <View className="ml-8">
-                                        <ProgressBar3 height={15} width={250} />
+                                        <ProgressBar height={15} width={250} percentage={60}/>
                                     </View>
                                 </View>
 

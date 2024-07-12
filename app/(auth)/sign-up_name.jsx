@@ -13,7 +13,7 @@ import {
 import { GradientBackground } from "../../components/auth/GradientBackground";
 import { useRouter } from 'expo-router';
 import { ChevronLeft } from "../../assets/icons/svg/Chevronleft";
-import { ProgressBar1 } from "../../assets/icons/svg/ProgressBar1";
+import { ProgressBar } from "../../assets/icons/svg/ProgressBar";
 import { PassportId } from "../../assets/images/svg/PassportId";
 import { FormField } from '../../components/auth/FormField';
 import { CustomButton } from "../../components/customButton";
@@ -53,7 +53,7 @@ export default function SignUpName() {
                                         <ChevronLeft height={50} width={50} />
                                     </TouchableOpacity>
                                     <View className="ml-8">
-                                        <ProgressBar1 height={15} width={250} />
+                                        <ProgressBar height={15} width={250} percentage={20} />
                                     </View>
                                 </View>
 
