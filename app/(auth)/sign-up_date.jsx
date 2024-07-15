@@ -37,6 +37,10 @@ export default function SignUpDate() {
         router.back();
     }
 
+    const skipbutton = () => {
+        router.push('/sign-up_noGenerated');
+    }
+
     const nextbutton = () => {
         const date = selectedDay + ' ' + months[selectedMonth] + ' ' + selectedYear;
         setAuthState((prevState) => ({

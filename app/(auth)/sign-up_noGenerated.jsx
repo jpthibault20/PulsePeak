@@ -13,13 +13,16 @@ import { GradientBackground } from "../../components/auth/GradientBackground";
 import { useRouter } from 'expo-router';
 import AuthContext from '../../context/AuthContext';
 import { CustomButton } from "../../components/customButton";
-import { LoadingSpinner } from "../../components/LoadingSpinner";
-import { FinishLine } from "../../assets/icons/svg/FinishLine";
+import { NoFiles } from "../../assets/icons/svg/NoFiles";
 
-const SignUpGenerated = () => {
+const signUpNoGenerated = () => {
   const { authState, setAuthState } = useContext(AuthContext);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
+
+  const nextbutton = () => {
+    router.push('/sign-up_generated');
+  }
 
   return (
     <GradientBackground>
@@ -39,10 +42,16 @@ const SignUpGenerated = () => {
                 {/* Content page */}
                 <View className="w-full justify-center items-center space-y-10 p-6">
                   <Text className="font-mregular text-center text-2xl mt-10 text-white">
-                    Générationde votre <Text className="font-mbold">assistant</Text> !
+                    Votre 
+                    <Text className="font-mbold">compte</Text> 
+                    es créé mais nous ne vous 
+                    <Text className="font-mbold"> connaissons pas encore assez </Text>
+                    pour le moment
                   </Text>
-                  <FinishLine width={300} height={300}/>
-                  <LoadingSpinner text="Cette opération peut prendre un certain temps, veuillez patienter" />
+                  <NoFiles width={300} height={300}/>
+                  <Text className="font-mregular text-center text-md mt-6 text-white">
+                    Vous pourrez modifier vos informations plus tard
+                  </Text>
                 </View>
 
 
@@ -65,4 +74,4 @@ const SignUpGenerated = () => {
   );
 };
 
-export default SignUpGenerated;
+export default signUpNoGenerated;

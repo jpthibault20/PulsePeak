@@ -13,6 +13,24 @@ const AuthLayout = () => {
                         headerShown: false
                     }}
                 />
+                <Stack.Screen
+                    name='ForgotPassword'
+                    options={{
+                        headerShown: false
+                    }}
+                />
+                <Stack.Screen
+                    name='ForgotPassword_codeVerification'
+                    options={{
+                        headerShown: false
+                    }}
+                />
+                <Stack.Screen
+                    name='ForgotPassword_new'
+                    options={{
+                        headerShown: false
+                    }}
+                />
 
                 <Stack.Screen
                     name='sign-up'
@@ -54,6 +72,12 @@ const AuthLayout = () => {
                 />
                 <Stack.Screen
                     name='sign-up_generated'
+                    options={{
+                        headerShown: false
+                    }}
+                />
+                <Stack.Screen
+                    name='sign-up_noGenerated'
                     options={{
                         headerShown: false
                     }}

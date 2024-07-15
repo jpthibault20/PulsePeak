@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput } from 'react-native';
 
-export default function InputDash({ title, otherStylescontainer, otherStylesTitle, setstate }) {
+export default function InputDash({ title, otherStylescontainer, otherStylesTitle, setstate,  }) {
 
     const onPressValues = (e) => {
         setstate(e)
