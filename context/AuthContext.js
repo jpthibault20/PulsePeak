@@ -15,7 +15,8 @@ export const AuthProvider = ({ children }) => {
     goal: "",
     sport: "",
     distance: "",
-    type: ""
+    type: "",
+    date: "",
   });
 
   return (

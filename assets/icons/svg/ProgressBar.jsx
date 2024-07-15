@@ -2,8 +2,7 @@ import * as React from "react";
 import Svg, { Path, Defs, LinearGradient, Stop } from "react-native-svg";
 
 export function ProgressBar({ width, height, percentage }) {
-    // Calculer la longueur de la partie remplie en fonction du pourcentage
-    const maxLength = 250; // Longueur maximale de la barre
+    const maxLength = 250;
     const filledLength = (percentage / 100) * maxLength;
 
     return (

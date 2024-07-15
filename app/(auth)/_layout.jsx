@@ -52,6 +52,12 @@ const AuthLayout = () => {
                         headerShown: false
                     }}
                 />
+                <Stack.Screen
+                    name='sign-up_generated'
+                    options={{
+                        headerShown: false
+                    }}
+                />
             </Stack>
         </AuthProvider>
     );

@@ -17,11 +17,20 @@ import { CustomButton } from "../../components/customButton";
 import { CustomLink } from '../../components/CustomLink';
 import AuthContext from '../../context/AuthContext';
 import { ProgressBar } from '../../assets/icons/svg/ProgressBar';
+import {DatePicker} from "../../components/DatePicker"
 
 export default function SignUpDate() {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
     const { authState, setAuthState } = useContext(AuthContext);
+    const [selectedDay, setSelectedDay] = useState(1);
+    const [selectedMonth, setSelectedMonth] = useState(0);
+    const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+
+    const months = [
+        'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
+        'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
+    ];
 
 
     const backbutton = () => {
@@ -29,8 +38,12 @@ export default function SignUpDate() {
     }
 
     const nextbutton = () => {
-        console.log(authState);
-        // router.push('/sign-up');
+        const date = selectedDay + ' ' + months[selectedMonth] + ' ' + selectedYear;
+        setAuthState((prevState) => ({
+            ...prevState,
+            date: date
+        }));
+        router.push('/sign-up_generated');
     }
 
     return (
@@ -57,7 +70,7 @@ export default function SignUpDate() {
                                 </View>
 
                                 {/* Page content */}
-                                <View className="w-full space-y-6">
+                                <View className="w-full space-y-10">
                                     <View className="w-full justify-center items-center">
                                         <Text className="font-mregular text-white text-2xl text-center">
                                         Quand voulez vous atteindre votre
@@ -66,12 +79,27 @@ export default function SignUpDate() {
                                         </Text>
                                     </View>
 
+                                    <View>
+                                        <DatePicker selectedDay={selectedDay} setSelectedDay={setSelectedDay} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} selectedYear={selectedYear} setSelectedYear={setSelectedYear} />
+                                    </View>
+                                    <View className="w-full justify-center items-center px-6">
+                                        <Text className="font-mregular text-white text-md text-center">
+                                            Le pic de forme correspond à la periode ou vous voulez atteindre votre meilleure forme.
+                                        </Text>
+                                    </View>
                                     
                                 </View>
 
                                 {/* Footer */}
                                 <View>
                                     <View className="w-full items-center">
+                                    <CustomButton
+                                            title="Ignorer"
+                                            handlePress={() => skipbutton()}
+                                            containerStyles="bg-[#1D4F68]"
+                                            textStyles="text-white"
+                                            isLoading={loading}
+                                        />
                                         <CustomButton
                                             title="Suivant"
                                             handlePress={() => nextbutton()}

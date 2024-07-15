@@ -58,15 +58,14 @@ export default function SignUpMoreInformation() {
                     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                         <ScrollView contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps="handled">
                             <View className="flex-1 justify-between min-h-full">
+
                                 {/* Header */}
                                 <View className="w-full h-[90px] flex-row items-center">
-                                    <View>
-                                        <TouchableOpacity onPress={backbutton}>
-                                            <ChevronLeft hight={50} width={50} />
-                                        </TouchableOpacity>
-                                    </View>
+                                    <TouchableOpacity onPress={backbutton}>
+                                        <ChevronLeft height={50} width={50} />
+                                    </TouchableOpacity>
                                     <View className="ml-8">
-                                        <ProgressBar hight={15} width={250} percentage={40}/>
+                                        <ProgressBar height={15} width={250} percentage={40} />
                                     </View>
                                 </View>
 

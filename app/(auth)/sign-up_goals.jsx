@@ -115,7 +115,7 @@ export default function SignUpGoals() {
                                         />
                                         <CustomRollingList
                                             title="Sport"
-                                            placeholder={'Votre sport'}
+                                            placeholder={"Sport de l'objectif"}
                                             data={sports}
                                             setstate={setSportsState}
                                             state={sportsState}
