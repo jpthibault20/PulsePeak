@@ -11,6 +11,14 @@ export const moreInformation_check = async (data) => {
     console.log(data);
 }
 
+export const coach_check = async (data) => {
+    console.log(data);
+}
+
+export const goals_check = async (data) => {
+    console.log(data);
+}
+
 
 
 

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect, useCallback } from 'react';
 import {
     View,
     Text,
@@ -17,6 +17,7 @@ import AuthContext from '../../context/AuthContext';
 import { ProgressBar } from '../../assets/icons/svg/ProgressBar';
 import { CustomRollingList } from '../../components/CustomRollingList';
 import { FooterSignUp } from '../../components/auth/FooterSignUp';
+import { goals_check } from '../../api/verification_signUp';
 
 export default function SignUpGoals() {
     const [loading, setLoading] = useState(false);
@@ -26,6 +27,21 @@ export default function SignUpGoals() {
     const [distanceState, setDistanceState] = useState("");
     const [typeState, setTypeState] = useState("");
     const { authState, setAuthState } = useContext(AuthContext);
+    const [loadingAuthstate, setLoadingAuthstate] = useState(false);
+
+    useEffect(() => {
+        if(loadingAuthstate === true){
+            goals_check(authState)
+            .then((response) => {
+                console.log(response);
+                router.push('/sign-up_date');
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+            setLoadingAuthstate(false);
+        }
+    }, [loadingAuthstate]);
 
     const goals = [
         { label: 'Performance', value: 'P' },
@@ -61,7 +77,9 @@ export default function SignUpGoals() {
         router.push('/sign-up_date');
     }
 
-    const nextbutton = () => {
+    const nextbutton = useCallback(() => {
+        setLoadingAuthstate(true);
+
         setAuthState((prevState) => ({
             ...prevState,
             goal: goalsState,
@@ -69,8 +87,9 @@ export default function SignUpGoals() {
             distance: distanceState,
             type: typeState
         }));
-        router.push('/sign-up_date');
-    }
+    }, [goalsState, sportsState, distanceState, typeState, setAuthState, authState, setLoadingAuthstate]);
+
+
 
     return (
         <GradientBackground>

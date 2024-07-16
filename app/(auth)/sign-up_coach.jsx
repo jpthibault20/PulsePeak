@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect, useCallback } from 'react';
 import {
     View,
     Text,
@@ -17,6 +17,7 @@ import { CustomButton } from "../../components/customButton";
 import AuthContext from '../../context/AuthContext';
 import { ProgressBar } from '../../assets/icons/svg/ProgressBar';
 import { FooterSignUp } from '../../components/auth/FooterSignUp';
+import { coach_check } from '../../api/verification_signUp';
 
 export default function SignUpCoach() {
     const [loading, setLoading] = useState(false);
@@ -24,6 +25,21 @@ export default function SignUpCoach() {
     const { authState, setAuthState } = useContext(AuthContext);
     const [basicButton, setBasicButton] = useState(false)
     const [advancedButton, setAdvancedButton] = useState(false)
+    const [loadingAuthstate, setLoadingAuthstate] = useState(false);
+
+    useEffect(() => {
+        if(loadingAuthstate === true){
+            coach_check(authState)
+            .then((response) => {
+                console.log(response);
+                router.push('/sign-up_moreInformation');
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+            setLoadingAuthstate(false);
+        }
+    }, [loadingAuthstate]);
 
     const handlePressBasic = () => {
         setBasicButton(!basicButton)
@@ -43,7 +59,7 @@ export default function SignUpCoach() {
         router.push('/sign-up_goals');
     }
 
-    const nextbutton = () => {
+    const nextbutton = useCallback(() => {
         const coach_mode = basicButton ? "Basic" : (advancedButton ? "Advanced" : "");
 
         setAuthState((prevState) => ({
@@ -51,8 +67,10 @@ export default function SignUpCoach() {
             coach_mode: coach_mode
         }));
 
-        router.push('/sign-up_goals');
-    }
+        setLoadingAuthstate(true);
+    }, [basicButton, advancedButton, setAuthState, authState, setLoadingAuthstate]);
+
+
 
     return (
         <GradientBackground>
