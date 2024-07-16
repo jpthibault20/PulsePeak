@@ -31,7 +31,7 @@ export default function NewPassword() {
     }
 
     const nextbutton = () => {
-        router.push('/ForgotPassword_codeVerification');
+        router.replace('/');
     }
 
     return (

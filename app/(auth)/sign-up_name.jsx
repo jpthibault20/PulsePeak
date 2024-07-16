@@ -16,9 +16,9 @@ import { ChevronLeft } from "../../assets/icons/svg/Chevronleft";
 import { ProgressBar } from "../../assets/icons/svg/ProgressBar";
 import { PassportId } from "../../assets/images/svg/PassportId";
 import { FormField } from '../../components/auth/FormField';
-import { CustomButton } from "../../components/customButton";
-import { CustomLink } from '../../components/CustomLink';
 import AuthContext from '../../context/AuthContext';
+import { FooterSignUp } from '../../components/auth/FooterSignUp';
+import { firstname_lastname_check } from '../../api/verification_signUp';
 
 export default function SignUpName() {
     const [loading, setLoading] = useState(false);
@@ -30,6 +30,7 @@ export default function SignUpName() {
     }
 
     const nextbutton = () => {
+        firstname_lastname_check(authState);
         router.push('/sign-up_moreInformation');
     }
 
@@ -88,21 +89,8 @@ export default function SignUpName() {
                                 </View>
 
                                 {/* Footer */}
-                                <View className="w-full items-center space-y-6 mb-10">
-                                    <CustomButton
-                                        title="Suivant"
-                                        handlePress={() => nextbutton()}
-                                        containerStyles=" bg-[#E8E8E8]"
-                                        isLoading={loading}
-                                    />
-                                    <View>
-                                        <CustomLink
-                                            title1="Vous avez déjà un compte ? "
-                                            titleLink="Connexion"
-                                            link="/sign-in"
-                                            containerStyles=""
-                                        />
-                                    </View>
+                                <View>
+                                    <FooterSignUp  nextButton={true} logInLink={true} nextFunction={nextbutton} loading={loading} />
                                 </View>
                             </View>
                         </ScrollView>

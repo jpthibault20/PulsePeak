@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect, useCallback } from 'react';
 import {
     View,
     Text,
@@ -13,11 +13,11 @@ import {
 import { GradientBackground } from "../../components/auth/GradientBackground";
 import { useRouter } from 'expo-router';
 import { ChevronLeft } from "../../assets/icons/svg/Chevronleft";
-import { CustomButton } from "../../components/customButton";
-import { CustomLink } from '../../components/CustomLink';
 import AuthContext from '../../context/AuthContext';
 import { ProgressBar } from '../../assets/icons/svg/ProgressBar';
 import {DatePicker} from "../../components/DatePicker"
+import { finaly_verification_signUp } from "../../api/verification_signUp";
+import { FooterSignUp } from '../../components/auth/FooterSignUp';
 
 export default function SignUpDate() {
     const [loading, setLoading] = useState(false);
@@ -26,6 +26,20 @@ export default function SignUpDate() {
     const [selectedDay, setSelectedDay] = useState(1);
     const [selectedMonth, setSelectedMonth] = useState(0);
     const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+    const [loadingAuthstate, setLoadingAuthstate] = useState(false);
+
+    useEffect(() => {
+        if(loadingAuthstate === true){
+            finaly_verification_signUp(authState)
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+            setLoadingAuthstate(false);
+        }
+    }, [loadingAuthstate]);
 
     const months = [
         'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
@@ -41,14 +55,15 @@ export default function SignUpDate() {
         router.push('/sign-up_noGenerated');
     }
 
-    const nextbutton = () => {
-        const date = selectedDay + ' ' + months[selectedMonth] + ' ' + selectedYear;
+    const nextbutton = useCallback(() => {
+        const date = `${selectedDay} ${months[selectedMonth]} ${selectedYear}`;
         setAuthState((prevState) => ({
             ...prevState,
-            date: date
+            date: date,
         }));
-        router.push('/sign-up_generated');
-    }
+
+        setLoadingAuthstate(true);
+    }, [selectedDay, selectedMonth, selectedYear, setAuthState, authState, setLoadingAuthstate]);
 
     return (
         <GradientBackground>
@@ -96,29 +111,7 @@ export default function SignUpDate() {
 
                                 {/* Footer */}
                                 <View>
-                                    <View className="w-full items-center">
-                                    <CustomButton
-                                            title="Ignorer"
-                                            handlePress={() => skipbutton()}
-                                            containerStyles="bg-[#1D4F68]"
-                                            textStyles="text-white"
-                                            isLoading={loading}
-                                        />
-                                        <CustomButton
-                                            title="Suivant"
-                                            handlePress={() => nextbutton()}
-                                            containerStyles="mt-4 bg-[#E8E8E8]"
-                                            isLoading={loading}
-                                        />
-                                    </View>
-
-                                    <View className="w-full items-center my-4 mb-10">
-                                        <CustomLink
-                                            title1="Vous avez déjà un compte ? "
-                                            titleLink="Connexion"
-                                            link="/sign-in"
-                                        />
-                                    </View>
+                                    <FooterSignUp skipButton={true} nextButton={true} logInLink={true} skipFunction={skipbutton} nextFunction={nextbutton} loading={loading} />
                                 </View>
                             </View>
                         </ScrollView>

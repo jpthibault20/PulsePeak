@@ -21,7 +21,7 @@ const signUpNoGenerated = () => {
   const router = useRouter();
 
   const nextbutton = () => {
-    router.push('/sign-up_generated');
+    router.replace("/home");
   }
 
   return (
@@ -43,7 +43,7 @@ const signUpNoGenerated = () => {
                 <View className="w-full justify-center items-center space-y-10 p-6">
                   <Text className="font-mregular text-center text-2xl mt-10 text-white">
                     Votre 
-                    <Text className="font-mbold">compte</Text> 
+                    <Text className="font-mbold"> compte </Text> 
                     es créé mais nous ne vous 
                     <Text className="font-mbold"> connaissons pas encore assez </Text>
                     pour le moment

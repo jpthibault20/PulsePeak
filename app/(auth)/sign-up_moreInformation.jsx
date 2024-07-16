@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect, useCallback } from 'react';
 import {
     View,
     Text,
@@ -13,12 +13,12 @@ import {
 import { GradientBackground } from "../../components/auth/GradientBackground";
 import { useRouter } from 'expo-router';
 import { ChevronLeft } from "../../assets/icons/svg/Chevronleft";
-import { CustomButton } from "../../components/customButton";
-import { CustomLink } from '../../components/CustomLink';
 import AuthContext from '../../context/AuthContext';
 import { ProgressBar } from '../../assets/icons/svg/ProgressBar';
 import { HumanSymbole } from '../../components/HumanSymbole';
 import InputDash from '../../components/InputDash';
+import { FooterSignUp } from '../../components/auth/FooterSignUp';
+import { moreInformation_check } from '../../api/verification_signUp';
 
 export default function SignUpMoreInformation() {
     const [loading, setLoading] = useState(false);
@@ -28,13 +28,31 @@ export default function SignUpMoreInformation() {
     const [femalePressed, setFemalePressed] = useState(false)
     const [hight, setHight] = useState("")
     const [weight, setWeight] = useState("")
+    const [loadingAuthstate, setLoadingAuthstate] = useState(false);
+
+    useEffect(() => {
+        if(loadingAuthstate === true){
+            moreInformation_check(authState)
+            .then((response) => {
+                console.log(response);
+                router.push('/sign-up_coach');
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+            setLoadingAuthstate(false);
+        }
+    }, [loadingAuthstate]);
 
     const backbutton = () => {
         router.back();
     }
 
-    const nextbutton = () => {
+    const skipbutton = () => {
+        router.push('/sign-up_coach');
+    }
 
+    const nextbutton = useCallback(() => {
         const gender = malePressed ? "Male" : (femalePressed ? "Female" : "");
 
         setAuthState((prevState) => ({
@@ -44,8 +62,8 @@ export default function SignUpMoreInformation() {
             weight: weight
         }));
 
-        router.push('/sign-up_coach');
-    }
+        setLoadingAuthstate(true);
+    }, [hight, weight, setAuthState, authState, setLoadingAuthstate]);
 
     return (
         <GradientBackground>
@@ -105,31 +123,8 @@ export default function SignUpMoreInformation() {
                                 </View>
 
                                 {/* Footer */}
-                                <View className="w-full items-center space-y-4">
-                                    <View>
-                                        <CustomButton
-                                            title="Ignorer"
-                                            handlePress={() => nextbutton()}
-                                            containerStyles="bg-[#1D4F68]"
-                                            textStyles="text-white"
-                                            isLoading={loading}
-                                        />
-                                    </View>
-                                    <View>
-                                        <CustomButton
-                                            title="Suivant"
-                                            handlePress={() => nextbutton()}
-                                            containerStyles="bg-[#E8E8E8]"
-                                            isLoading={loading}
-                                        />
-                                    </View>
-                                    <View className="w-full items-center mb-10">
-                                        <CustomLink
-                                            title1="Vous avez déjà un compte ? "
-                                            titleLink="Connexion"
-                                            link="/sign-in"
-                                        />
-                                    </View>
+                                <View>
+                                    <FooterSignUp skipButton={true} nextButton={true} logInLink={true} skipFunction={skipbutton} nextFunction={nextbutton} loading={loading} />
                                 </View>
                             </View>
                         </ScrollView>

@@ -11,7 +11,7 @@ export const DatePicker = ({selectedDay, setSelectedDay, selectedMonth, setSelec
         'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
         'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
     ];
-    const years = Array.from({ length: 10 }, (_, i) => new Date().getFullYear() + i);
+    const years = Array.from({ length: 2 }, (_, i) => new Date().getFullYear() + i);
 
     return (
         <View className={`flex-row space-around items-center p-6 ${Platform.OS === 'android' ? 'pt-20' : 'pb-28'}`}>

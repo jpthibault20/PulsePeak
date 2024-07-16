@@ -18,6 +18,7 @@ import { OAuthButton } from "../../components/auth/OAuthButton";
 import { supabase } from '../../lib/supabase';
 import { useRouter } from 'expo-router';
 import AuthContext from '../../context/AuthContext';
+import { email_password_check } from '../../api/verification_signUp';
 
 const SignUp = () => {
   const { authState, setAuthState } = useContext(AuthContext);
@@ -36,6 +37,7 @@ const SignUp = () => {
 
     // if (error) Alert.alert(error.message);
     // if (!session) Alert.alert('Please check your inbox for email verification!');
+    email_password_check(authState);
     router.push('/sign-up_name');
     setLoading(false);
   }
