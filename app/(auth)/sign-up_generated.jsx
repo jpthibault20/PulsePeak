@@ -21,6 +21,10 @@ const SignUpGenerated = () => {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
+  const nextbutton = () => {
+    // router.replace('/home');
+  }
+
   return (
     <GradientBackground>
       <SafeAreaView className="flex-1">
@@ -39,7 +43,7 @@ const SignUpGenerated = () => {
                 {/* Content page */}
                 <View className="w-full justify-center items-center space-y-10 p-6">
                   <Text className="font-mregular text-center text-2xl mt-10 text-white">
-                    Générationde votre <Text className="font-mbold">assistant</Text> !
+                    Génération de votre <Text className="font-mbold"> assistant</Text> !
                   </Text>
                   <FinishLine width={300} height={300}/>
                   <LoadingSpinner text="Cette opération peut prendre un certain temps, veuillez patienter" />

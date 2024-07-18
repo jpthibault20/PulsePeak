@@ -9,6 +9,7 @@ import {
     Keyboard,
     Platform,
     ScrollView,
+    Alert,
 } from 'react-native';
 import { GradientBackground } from "../../components/auth/GradientBackground";
 import { useRouter } from 'expo-router';
@@ -30,8 +31,19 @@ export default function SignUpName() {
     }
 
     const nextbutton = () => {
-        firstname_lastname_check(authState);
-        router.push('/sign-up_moreInformation');
+        firstname_lastname_check(authState)
+        .then((response) => {
+            if (response.false) {
+                Alert.alert(response.false);
+            }
+            else {
+                router.push('/sign-up_moreInformation');
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+        // router.push('/sign-up_moreInformation');
     }
 
     return (

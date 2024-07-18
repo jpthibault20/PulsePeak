@@ -9,6 +9,7 @@ import {
     Keyboard,
     Platform,
     ScrollView,
+    Alert,
 } from 'react-native';
 import { GradientBackground } from "../../components/auth/GradientBackground";
 import { useRouter } from 'expo-router';
@@ -31,12 +32,13 @@ export default function SignUpCoach() {
         if(loadingAuthstate === true){
             coach_check(authState)
             .then((response) => {
-                console.log(response);
-                router.push('/sign-up_moreInformation');
+                if (response.false) {
+                    Alert.alert(response.false);
+                }
+                else {
+                    router.push('/sign-up_goals');
+                }
             })
-            .catch((error) => {
-                console.log(error);
-            });
             setLoadingAuthstate(false);
         }
     }, [loadingAuthstate]);

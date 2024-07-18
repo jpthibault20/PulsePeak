@@ -9,15 +9,17 @@ import {
     Keyboard,
     Platform,
     ScrollView,
+    Alert,
 } from 'react-native';
 import { GradientBackground } from "../../components/auth/GradientBackground";
 import { useRouter } from 'expo-router';
 import { ChevronLeft } from "../../assets/icons/svg/Chevronleft";
 import AuthContext from '../../context/AuthContext';
 import { ProgressBar } from '../../assets/icons/svg/ProgressBar';
-import {DatePicker} from "../../components/DatePicker"
+import { DatePicker } from "../../components/DatePicker";
 import { finaly_verification_signUp } from "../../api/verification_signUp";
 import { FooterSignUp } from '../../components/auth/FooterSignUp';
+import { stringToDate } from "../../lib/dateConverter";
 
 export default function SignUpDate() {
     const [loading, setLoading] = useState(false);
@@ -29,23 +31,22 @@ export default function SignUpDate() {
     const [loadingAuthstate, setLoadingAuthstate] = useState(false);
 
     useEffect(() => {
-        if(loadingAuthstate === true){
+        if (loadingAuthstate === true) {
             finaly_verification_signUp(authState)
-            .then((response) => {
-                console.log(response);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-            setLoadingAuthstate(false);
+                .then((response) => {
+                    if (response.false) {
+                        Alert.alert(response.false);
+                    } else {
+                        router.push('/sign-up_generated');
+                    }
+                })
+                .catch((error) => {
+                })
+                .finally(() => {
+                    setLoadingAuthstate(false);
+                });
         }
-    }, [loadingAuthstate]);
-
-    const months = [
-        'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
-        'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
-    ];
-
+    }, [loadingAuthstate, authState, router]);
 
     const backbutton = () => {
         router.back();
@@ -55,15 +56,17 @@ export default function SignUpDate() {
         router.push('/sign-up_noGenerated');
     }
 
-    const nextbutton = useCallback(() => {
-        const date = `${selectedDay} ${months[selectedMonth]} ${selectedYear}`;
+    const nextbutton = useCallback((e) => {
+        e.preventDefault();
+        const date = stringToDate(selectedDay, selectedMonth, selectedYear);
+
         setAuthState((prevState) => ({
             ...prevState,
             date: date,
         }));
 
         setLoadingAuthstate(true);
-    }, [selectedDay, selectedMonth, selectedYear, setAuthState, authState, setLoadingAuthstate]);
+    }, [selectedDay, selectedMonth, selectedYear, setAuthState]);
 
     return (
         <GradientBackground>
@@ -84,7 +87,7 @@ export default function SignUpDate() {
                                         </TouchableOpacity>
                                     </View>
                                     <View className="ml-8">
-                                        <ProgressBar height={15} width={250} percentage={100}/>
+                                        <ProgressBar height={15} width={250} percentage={100} />
                                     </View>
                                 </View>
 
@@ -92,7 +95,7 @@ export default function SignUpDate() {
                                 <View className="w-full space-y-10">
                                     <View className="w-full justify-center items-center">
                                         <Text className="font-mregular text-white text-2xl text-center">
-                                        Quand voulez vous atteindre votre
+                                            Quand voulez-vous atteindre votre
                                             <Text className="font-mbold"> pic de forme</Text>
                                             ?
                                         </Text>
@@ -103,10 +106,9 @@ export default function SignUpDate() {
                                     </View>
                                     <View className="w-full justify-center items-center px-6">
                                         <Text className="font-mregular text-white text-md text-center">
-                                            Le pic de forme correspond à la periode ou vous voulez atteindre votre meilleure forme.
+                                            Le pic de forme correspond à la période où vous voulez atteindre votre meilleure forme.
                                         </Text>
                                     </View>
-                                    
                                 </View>
 
                                 {/* Footer */}

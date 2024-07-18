@@ -21,7 +21,7 @@ export const FooterSignUp = ({ skipButton, nextButton, logInLink, skipFunction, 
                 <View>
                     <CustomButton
                         title="Suivant"
-                        handlePress={() => nextFunction()}
+                        handlePress={(e) => nextFunction(e)}
                         containerStyles="bg-[#E8E8E8]"
                         isLoading={loading}
                     />

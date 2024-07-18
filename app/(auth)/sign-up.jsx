@@ -37,8 +37,18 @@ const SignUp = () => {
 
     // if (error) Alert.alert(error.message);
     // if (!session) Alert.alert('Please check your inbox for email verification!');
-    email_password_check(authState);
-    router.push('/sign-up_name');
+    email_password_check(authState)
+    .then((response) => {
+      if (response.false) {
+        Alert.alert(response.false);
+      }
+      else {
+        router.push('/sign-up_name');
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
     setLoading(false);
   }
 

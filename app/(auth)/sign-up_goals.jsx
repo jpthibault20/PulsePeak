@@ -9,6 +9,7 @@ import {
     Keyboard,
     Platform,
     ScrollView,
+    Alert,
 } from 'react-native';
 import { GradientBackground } from "../../components/auth/GradientBackground";
 import { useRouter } from 'expo-router';
@@ -18,6 +19,8 @@ import { ProgressBar } from '../../assets/icons/svg/ProgressBar';
 import { CustomRollingList } from '../../components/CustomRollingList';
 import { FooterSignUp } from '../../components/auth/FooterSignUp';
 import { goals_check } from '../../api/verification_signUp';
+import { skip_signUp } from '../../api/verification_signUp';
+import { finaly_verification_signUp } from '../../api/verification_signUp';
 
 export default function SignUpGoals() {
     const [loading, setLoading] = useState(false);
@@ -28,20 +31,50 @@ export default function SignUpGoals() {
     const [typeState, setTypeState] = useState("");
     const { authState, setAuthState } = useContext(AuthContext);
     const [loadingAuthstate, setLoadingAuthstate] = useState(false);
+    const [disabledAdvancedGoals, setDisabledAdvancedGoals] = useState(false);
 
     useEffect(() => {
         if(loadingAuthstate === true){
             goals_check(authState)
-            .then((response) => {
-                console.log(response);
-                router.push('/sign-up_date');
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+                .then((response) => {
+                    if (response.false) {
+                        Alert.alert(response.false);
+                    }
+                    else {
+                        if (authState.goal === "P") {
+                            router.push('/sign-up_date');
+                        }     
+                        else {
+                            finaly_verification_signUp(authState)
+                                .then((response) => {
+                                    if (response.false) {
+                                        Alert.alert(response.false);
+                                    }
+                                    else {
+                                        router.push('/sign-up_generated');
+                                    }
+                                })
+                                .catch((error) => {
+                                    console.log(error);
+                                });
+                        }
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
             setLoadingAuthstate(false);
         }
     }, [loadingAuthstate]);
+
+    useEffect(() => {
+        if(goalsState === "P"){
+            setDisabledAdvancedGoals(false);
+        }
+        else {
+            setDisabledAdvancedGoals(true);
+        }
+    }, [goalsState]);
 
     const goals = [
         { label: 'Performance', value: 'P' },
@@ -74,7 +107,18 @@ export default function SignUpGoals() {
     }
 
     const skipbutton = () => {
-        router.push('/sign-up_date');
+        skip_signUp(authState)
+            .then((response) => {
+                if (response.false) {
+                    Alert.alert(response.false);
+                }
+                else {
+                    router.push('/sign-up_noGenerated');
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 
     const nextbutton = useCallback(() => {
@@ -138,6 +182,7 @@ export default function SignUpGoals() {
                                             data={sports}
                                             setstate={setSportsState}
                                             state={sportsState}
+                                            disabled={disabledAdvancedGoals}
                                         />
                                         <CustomRollingList
                                             title="Distance"
@@ -145,6 +190,7 @@ export default function SignUpGoals() {
                                             data={distance}
                                             setstate={setDistanceState}
                                             state={distanceState}
+                                            disabled={disabledAdvancedGoals}
                                         />
                                         <CustomRollingList
                                             title="Type"
@@ -152,6 +198,7 @@ export default function SignUpGoals() {
                                             data={type}
                                             setstate={setTypeState}
                                             state={typeState}
+                                            disabled={disabledAdvancedGoals}
                                         />
                                     </View>
                                 </View>
