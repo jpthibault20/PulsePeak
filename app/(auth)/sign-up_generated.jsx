@@ -21,6 +21,8 @@ const SignUpGenerated = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  console.log(authState);
+  
   const nextbutton = () => {
     router.replace('/home');
   }

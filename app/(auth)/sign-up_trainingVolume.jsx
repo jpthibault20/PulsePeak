@@ -30,19 +30,19 @@ export default function SignUpTrainingVolume() {
     const [loadingAuthstate, setLoadingAuthstate] = useState(false);
 
     useEffect(() => {
-        if(loadingAuthstate === true){
+        if (loadingAuthstate === true) {
             trainingVolume_check(authState)
-            .then((response) => {
-                if (response.false) {
-                    Alert.alert(response.false);
-                }
-                else {
-                    router.push('/sign-up_coach');
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+                .then((response) => {
+                    if (response.false) {
+                        Alert.alert(response.false);
+                    }
+                    else {
+                        router.push('/sign-up_coach');
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
             setLoadingAuthstate(false);
         }
     }, [loadingAuthstate]);
@@ -52,10 +52,10 @@ export default function SignUpTrainingVolume() {
     }
 
     const skipbutton = () => {
-      router.push('/sign-up_coach');
-  }
+        router.push('/sign-up_coach');
+    }
 
-    const nextbutton  = useCallback(() => {
+    const nextbutton = useCallback(() => {
         setAuthState((prevState) => ({
             ...prevState,
             trainingVolume: trainingVolume
@@ -63,7 +63,7 @@ export default function SignUpTrainingVolume() {
 
         setLoadingAuthstate(true);
     }, [trainingVolume, setAuthState, authState, setLoadingAuthstate]);
-    
+
 
     return (
         <GradientBackground>
@@ -93,26 +93,26 @@ export default function SignUpTrainingVolume() {
                                 <View className="w-full space-y-28">
                                     <View className="w-full justify-center items-center px-4">
                                         <Text className="font-mregular text-white text-2xl text-center">
-                                            Quel est votre 
+                                            Quel est votre
                                             <Text className="font-mbold"> volume d'entrainement</Text>
                                             actuel ?
                                         </Text>
                                     </View>
 
                                     <View>
-                                    <InputDash title={"Nombre d'heure par semaine"} unit={"h/semaine"} setstate={setTrainingVolume} nbInput={2} />
+                                        <InputDash title={"Nombre d'heure par semaine"} unit={"h/semaine"} setstate={setTrainingVolume} nbInput={2} />
                                     </View>
 
                                     <View>
-                                      <Text className="font-mregular text-white text-md mt-6 text-center">
-                                        Ce paramètre est configurable par la suite
-                                      </Text>
+                                        <Text className="font-mregular text-white text-md mt-6 text-center">
+                                            Ce paramètre est configurable par la suite
+                                        </Text>
                                     </View>
                                 </View>
 
                                 {/* Footer */}
                                 <View>
-                                    <FooterSignUp  skipButton={true} nextButton={true} logInLink={true} skipFunction={skipbutton} nextFunction={nextbutton} loading={loading} />
+                                    <FooterSignUp skipButton={true} nextButton={true} logInLink={true} skipFunction={skipbutton} nextFunction={nextbutton} loading={loading} />
                                 </View>
                             </View>
                         </ScrollView>

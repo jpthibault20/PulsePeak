@@ -97,6 +97,10 @@ export const trainingVolume_check = async (inputData) => {
         return { false: "Tous les champs sont requis" };
     }
 
+    if (isNaN(inputData.trainingVolume)) {
+        return { false: "La valeure du volume d'entrainement n'est pas valide" };
+    }
+
     return { true: "All good" };
 }   
 
@@ -185,6 +189,7 @@ export const finaly_verification_signUp = async (inputData) => {
             goal_type: inputData.type || "",
             goal_sport: inputData.sport || "",
             goal_date: inputData.date || null,
+            trainingVolume: inputData.trainingVolume || "",
 
         }]
         )
