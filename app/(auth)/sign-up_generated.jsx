@@ -18,11 +18,11 @@ import { FinishLine } from "../../assets/icons/svg/FinishLine";
 
 const SignUpGenerated = () => {
   const { authState, setAuthState } = useContext(AuthContext);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const nextbutton = () => {
-    // router.replace('/home');
+    router.replace('/home');
   }
 
   return (

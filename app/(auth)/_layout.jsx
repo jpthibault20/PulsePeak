@@ -53,6 +53,12 @@ const AuthLayout = () => {
                     }}
                 />
                 <Stack.Screen
+                    name='sign-up_trainingVolume'
+                    options={{
+                        headerShown: false
+                    }}
+                />
+                <Stack.Screen
                     name='sign-up_coach'
                     options={{
                         headerShown: false

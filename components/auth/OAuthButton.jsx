@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native'
 import { useRouter } from 'expo-router'; // Assurez-vous d'importer useRouter
 import { GoogleIcon } from "../../assets/icons/svg/GoogleIcon"
 import { FacebookIcon } from '../../assets/icons/svg/FacebookIcon'
@@ -10,9 +10,11 @@ const Button = ({ title }) => {
 
     const handlePress = () => {
         if (title === "Google") {
-            router.push("/");
+            // router.push("/");
+            Alert.alert("functionality not yet available")
         } else {
-            router.push("/sign-in");
+            // router.push("/sign-in");
+            Alert.alert("functionality not yet available")
         }
     };
     return (

@@ -17,6 +17,7 @@ export const AuthProvider = ({ children }) => {
     distance: "",
     type: "",
     date: "",
+    trainingVolume: "",
   });
 
   return (

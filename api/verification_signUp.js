@@ -64,7 +64,7 @@ export const firstname_lastname_check = async (inputData) => {
  * @param {*} inputData
  * @returns
  *  true: All good
- *  false: Une erreur est survenue lors de la connexion
+ *  false: 
  */
 export const moreInformation_check = async (inputData) => {
     if (inputData.gender === "" || inputData.hight === "" || inputData.weight === "") {
@@ -84,6 +84,22 @@ export const moreInformation_check = async (inputData) => {
 
     return { true: "All good" };
 }
+
+/**
+ * 
+ * @param {*} inputData
+ * @returns
+ *  true: All good
+ *  false: Tous les champs sont requis
+ */
+export const trainingVolume_check = async (inputData) => {
+    if (inputData.trainingVolume === "") {
+        return { false: "Tous les champs sont requis" };
+    }
+
+    return { true: "All good" };
+}   
+
 
 /**
  * 

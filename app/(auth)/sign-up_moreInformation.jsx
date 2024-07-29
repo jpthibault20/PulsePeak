@@ -39,7 +39,7 @@ export default function SignUpMoreInformation() {
                         Alert.alert(response.false);
                     }
                     else {
-                        router.push('/sign-up_coach');
+                        router.push('/sign-up_trainingVolume');
                     }
                 })
             setLoadingAuthstate(false);
@@ -51,7 +51,7 @@ export default function SignUpMoreInformation() {
     }
 
     const skipbutton = () => {
-        router.push('/sign-up_coach');
+        router.push('/sign-up_trainingVolume');
     }
 
     const nextbutton = useCallback(() => {
@@ -120,8 +120,8 @@ export default function SignUpMoreInformation() {
                                             />
                                         </View>
                                     </View>
-                                    <InputDash title={"weight"} setstate={setWeight} />
-                                    <InputDash title={"hight"} setstate={setHight} />
+                                    <InputDash title={"poids"} unit={"kg"} setstate={setWeight} nbInput={3} />
+                                    <InputDash title={"taille"} unit={"cm"} setstate={setHight} nbInput={3} />
                                 </View>
 
                                 {/* Footer */}

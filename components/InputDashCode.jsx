@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { CodeField, Cursor, useBlurOnFulfill, useClearByFocusCell } from 'react-native-confirmation-code-field';
 
-const CELL_COUNT = 3;  // Le nombre de chiffres du code
-
-export const InputDashCode = ({ setInput }) => {
+export const InputDashCode = ({ setInput, CELL_COUNT }) => {
     const [value, setValue] = useState('');
     const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
     const [props, getCellOnLayoutHandler] = useClearByFocusCell({
