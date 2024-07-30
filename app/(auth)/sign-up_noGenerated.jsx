@@ -21,7 +21,7 @@ const signUpNoGenerated = () => {
   const router = useRouter();
 
   const nextbutton = () => {
-    router.replace("/home");
+    router.replace("/Home");
   }
 
   return (
@@ -42,13 +42,13 @@ const signUpNoGenerated = () => {
                 {/* Content page */}
                 <View className="w-full justify-center items-center space-y-10 p-6">
                   <Text className="font-mregular text-center text-2xl mt-10 text-white">
-                    Votre 
-                    <Text className="font-mbold"> compte </Text> 
-                    es créé mais nous ne vous 
+                    Votre
+                    <Text className="font-mbold"> compte </Text>
+                    es créé mais nous ne vous
                     <Text className="font-mbold"> connaissons pas encore assez </Text>
                     pour le moment
                   </Text>
-                  <NoFiles width={300} height={300}/>
+                  <NoFiles width={300} height={300} />
                   <Text className="font-mregular text-center text-md mt-6 text-white">
                     Vous pourrez modifier vos informations plus tard
                   </Text>

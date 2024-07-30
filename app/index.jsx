@@ -25,7 +25,7 @@ export default function App() {
 
     useEffect(() => {
         if (session) {
-            router.replace("/home")
+            router.replace("/Home")
         }
     }, [session])
 

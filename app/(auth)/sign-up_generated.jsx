@@ -22,9 +22,9 @@ const SignUpGenerated = () => {
   const router = useRouter();
 
   console.log(authState);
-  
+
   const nextbutton = () => {
-    router.replace('/home');
+    router.replace('/Home');
   }
 
   return (
@@ -47,7 +47,7 @@ const SignUpGenerated = () => {
                   <Text className="font-mregular text-center text-2xl mt-10 text-white">
                     Génération de votre <Text className="font-mbold"> assistant</Text> !
                   </Text>
-                  <FinishLine width={300} height={300}/>
+                  <FinishLine width={300} height={300} />
                   <LoadingSpinner text="Cette opération peut prendre un certain temps, veuillez patienter" />
                 </View>
 

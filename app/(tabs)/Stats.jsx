@@ -1,13 +1,13 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 
-const Home = () => {
+const Stats = () => {
     return (
         <View className="w-full h-full justify-center items-center space-y-4 bg-white">
             <Text>
-                Home page
+                Stats page
             </Text>
         </View>)
 }
 
-export default Home
+export default Stats
