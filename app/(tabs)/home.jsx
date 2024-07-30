@@ -1,13 +1,19 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, SafeAreaView } from 'react-native'
+import { TemplatePP } from '../../components/tabs/TemplatePP'
 
 const Home = () => {
     return (
-        <View className="w-full h-full justify-center items-center space-y-4 bg-white">
-            <Text>
-                Home page
-            </Text>
-        </View>)
+        <SafeAreaView className="bg-white">
+            <TemplatePP>
+                <View className="border m-2 mb-[100px]">
+                    <Text>
+                        Home page
+                    </Text>
+                </View>
+            </TemplatePP>
+        </SafeAreaView>
+    )
 }
 
 export default Home
