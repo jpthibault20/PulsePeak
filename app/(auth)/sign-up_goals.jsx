@@ -34,7 +34,7 @@ export default function SignUpGoals() {
     const [disabledAdvancedGoals, setDisabledAdvancedGoals] = useState(false);
 
     useEffect(() => {
-        if(loadingAuthstate === true){
+        if (loadingAuthstate === true) {
             goals_check(authState)
                 .then((response) => {
                     if (response.false) {
@@ -43,7 +43,7 @@ export default function SignUpGoals() {
                     else {
                         if (authState.goal === "P") {
                             router.push('/sign-up_date');
-                        }     
+                        }
                         else {
                             finaly_verification_signUp(authState)
                                 .then((response) => {
@@ -68,7 +68,7 @@ export default function SignUpGoals() {
     }, [loadingAuthstate]);
 
     useEffect(() => {
-        if(goalsState === "P"){
+        if (goalsState === "P") {
             setDisabledAdvancedGoals(false);
         }
         else {
@@ -154,7 +154,7 @@ export default function SignUpGoals() {
                                         </TouchableOpacity>
                                     </View>
                                     <View className="ml-8">
-                                        <ProgressBar height={15} width={250} percentage={80}/>
+                                        <ProgressBar height={15} width={250} percentage={83} />
                                     </View>
                                 </View>
 

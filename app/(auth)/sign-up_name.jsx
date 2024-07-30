@@ -32,17 +32,17 @@ export default function SignUpName() {
 
     const nextbutton = () => {
         firstname_lastname_check(authState)
-        .then((response) => {
-            if (response.false) {
-                Alert.alert(response.false);
-            }
-            else {
-                router.push('/sign-up_moreInformation');
-            }
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+            .then((response) => {
+                if (response.false) {
+                    Alert.alert(response.false);
+                }
+                else {
+                    router.push('/sign-up_moreInformation');
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
         // router.push('/sign-up_moreInformation');
     }
 
@@ -66,7 +66,7 @@ export default function SignUpName() {
                                         <ChevronLeft height={50} width={50} />
                                     </TouchableOpacity>
                                     <View className="ml-8">
-                                        <ProgressBar height={15} width={250} percentage={20} />
+                                        <ProgressBar height={15} width={250} percentage={16} />
                                     </View>
                                 </View>
 
@@ -102,7 +102,7 @@ export default function SignUpName() {
 
                                 {/* Footer */}
                                 <View>
-                                    <FooterSignUp  nextButton={true} logInLink={true} nextFunction={nextbutton} loading={loading} />
+                                    <FooterSignUp nextButton={true} logInLink={true} nextFunction={nextbutton} loading={loading} />
                                 </View>
                             </View>
                         </ScrollView>

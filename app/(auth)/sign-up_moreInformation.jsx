@@ -85,7 +85,7 @@ export default function SignUpMoreInformation() {
                                         <ChevronLeft height={50} width={50} />
                                     </TouchableOpacity>
                                     <View className="ml-8">
-                                        <ProgressBar height={15} width={250} percentage={40} />
+                                        <ProgressBar height={15} width={250} percentage={33} />
                                     </View>
                                 </View>
 

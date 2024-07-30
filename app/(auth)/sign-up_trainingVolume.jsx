@@ -85,7 +85,7 @@ export default function SignUpTrainingVolume() {
                                         <ChevronLeft height={50} width={50} />
                                     </TouchableOpacity>
                                     <View className="ml-8">
-                                        <ProgressBar height={15} width={250} percentage={20} />
+                                        <ProgressBar height={15} width={250} percentage={50} />
                                     </View>
                                 </View>
 

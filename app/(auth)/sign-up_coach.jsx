@@ -93,7 +93,7 @@ export default function SignUpCoach() {
                                         </TouchableOpacity>
                                     </View>
                                     <View className="ml-8">
-                                        <ProgressBar height={15} width={250} percentage={60}/>
+                                        <ProgressBar height={15} width={250} percentage={67}/>
                                     </View>
                                 </View>
 
