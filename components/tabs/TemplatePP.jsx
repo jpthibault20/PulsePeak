@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, ActivityIndicator, TouchableOpacity, Alert } from 'react-native'
+import { View, Text, ActivityIndicator, TouchableOpacity, Alert, StatusBar } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
 import { TextMe } from '../../assets/icons/svg/TextMe'
 import { useState, useEffect } from 'react'
@@ -63,7 +63,8 @@ export const TemplatePP = ({ isLoading }) => {
     }
 
     return (
-        <View className="w-full h-full bg-white">
+        <View className="w-full h-full bg-red-100">
+            <StatusBar barStyle="dark-content" />
             <TextInputComponent
                 modalVisible={modalVisible}
                 setModalVisible={setModalVisible}
