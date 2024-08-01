@@ -18,7 +18,7 @@ const Home = () => {
     return (
         <View className="bg-white h-full">
             <TemplatePP isLoading={true} />
-            <View className="h-3/5 w-full bg-[#F4F4F4F4]">
+            <View className="h-3/5 w-full bg-[#F4F4F4F4] bor">
                 <View className="flex flex-row justify-between items-center p-6">
                     <View>
                         <Text className="font-mregular text-xl">
@@ -34,7 +34,7 @@ const Home = () => {
                     </View>
                 </View>
 
-                <View className="w-full">
+                <View className="w-full border h-full">
                     {switchValue === "M" ? <MonthlyView calendar={calendar} /> : <WeeklyView calendar={calendar} />}
                 </View>
 

@@ -75,7 +75,7 @@ export const TemplatePP = ({ isLoading }) => {
                 setTextInputprops={setTextInput}
                 onSubmit={onSubmit}
             />
-            <View className={Platform.OS === 'android' ? 'h-[58px]' : 'h-[80px]'}>
+            <View className='h-[80px]'>
                 <LinearGradient
                     colors={['#03BADB', '#0097B2', '#0552B1']}
                     start={{ x: 0, y: 0 }}

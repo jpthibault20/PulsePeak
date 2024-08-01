@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, TouchableOpacity, ImageBackground, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, ImageBackground, StyleSheet, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs, useNavigation, useRouter } from 'expo-router';
 import { SuiviIcon } from '../../assets/icons/svg/Suivi';
@@ -33,7 +33,7 @@ function CustomTabBar({ state, descriptors, navigation }) {
             </TouchableOpacity>
             <ImageBackground
                 source={require('../../assets/backgroundFooter.png')}
-                className="h-[110px]"
+                className={`h-[110px] ${Platform.OS === "android" ? "-mb-5" : "-mb-2"} `}
             >
                 <View className="flex-row h-full">
                     {[0, 1, 2, 3, 4].map((columnIndex) => {
