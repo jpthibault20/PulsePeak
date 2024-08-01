@@ -1,13 +1,66 @@
 import React from 'react'
-import { View, Text, ActivityIndicator, TouchableOpacity } from 'react-native'
+import { View, Text, ActivityIndicator, TouchableOpacity, Alert } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
 import { TextMe } from '../../assets/icons/svg/TextMe'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { TextInputComponent } from "../TextInputComponent"
+import { reportBug } from "../../api/reportBug"
+import { supabase } from '../../lib/supabase'
 
-export const TemplatePP = ({ children, isLoading }) => {
+
+export const TemplatePP = ({ isLoading }) => {
     const [modalVisible, setModalVisible] = useState(false)
     const [TextInput, setTextInput] = useState("")
+    const [session_id, setSession_id] = useState("");
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const getSessionId = async () => {
+            const response = await supabase.auth.getSession();
+            const { data, error } = response;
+
+            if (error) {
+                Alert.alert('Erreur lors de la connexion:', error.message);
+            } else if (data && data.session && data.session.user) {
+                setSession_id(data.session.user.id);
+            }
+        }
+
+        const getUser = async () => {
+            if (session_id) {
+                const response = await supabase
+                    .from('users')
+                    .select('*')
+                    .eq('session_id', session_id);
+                const { data, error } = response;
+
+                if (error) {
+                    console.log("Err : ", error.message);
+                } else if (data) {
+                    setUser(data[0]); // Si vous attendez un seul utilisateur
+                }
+            }
+        }
+
+        getSessionId()
+        getUser()
+
+    }, [session_id])
+
+    const onSubmit = () => {
+        reportBug({ TextInput, user })
+            .then(res => {
+                if (res.error) {
+                    Alert.alert('Erreur lors de la soumission du bug:', res.error);
+                } else {
+                    Alert.alert("Bug soumis avec succès");
+                    setTextInput("");
+                }
+            })
+            .catch(err => {
+                Alert.alert('Err. ', err.message);
+            })
+    }
 
     return (
         <View className="w-full h-full bg-white">
@@ -17,8 +70,9 @@ export const TemplatePP = ({ children, isLoading }) => {
                 Title="Signaler un bug"
                 detail=""
                 placholder="Détails de votre problème (context, pages, etapes, etc.)"
-                TextInput={setTextInput}
-                setTextInput={setTextInput}
+                TextInputprops={TextInput}
+                setTextInputprops={setTextInput}
+                onSubmit={onSubmit}
             />
             <View className="h-[58px]">
                 <LinearGradient
@@ -44,8 +98,6 @@ export const TemplatePP = ({ children, isLoading }) => {
                     </View>
                 </LinearGradient>
             </View>
-
-            {children}
         </View >
     )
 }

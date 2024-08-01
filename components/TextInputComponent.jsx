@@ -1,8 +1,15 @@
 import React, { useState } from 'react'
-import { View, Text, TouchableOpacity, Modal, StyleSheet, TextInput } from 'react-native'
+import { View, Text, TouchableOpacity, Modal, StyleSheet, TextInput, TouchableWithoutFeedback, KeyboardAvoidingView, Platform, Keyboard } from 'react-native'
+import { CustomButton } from './customButton'
+
+export const TextInputComponent = ({ modalVisible, setModalVisible, Title, detail, placholder, TextInputprops, setTextInputprops, onSubmit }) => {
 
 
-export const TextInputComponent = ({ modalVisible, setModalVisible, Title, detail, placholder, TextInputprops, setTextInputprops }) => {
+    const onSubmitPress = () => {
+        onSubmit();
+        setModalVisible(false)
+    }
+
     return (
         <Modal
             animationType="slide"
@@ -10,29 +17,46 @@ export const TextInputComponent = ({ modalVisible, setModalVisible, Title, detai
             visible={modalVisible}
             onRequestClose={() => setModalVisible(false)}
         >
-            <View className="flex-1 justify-center items-center mt-22">
-                <View
-                    style={styles.modalView}
-                >
-                    <Text className="font-mbold text-lg">
-                        {Title}
-                    </Text>
-                    <TextInput
-                        placeholder={placholder}
-                        value={TextInputprops}
-                        onChangeText={setTextInputprops}
-                    />
-                    <TouchableOpacity
-                        onPress={() => setModalVisible(false)}
-                        className="mt-4 border p-2 rounded-xl justify-center items-center bg-red-900"
-                    >
-                        <Text className="text-white font-mbold">
-                            Hide modal
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
+            <TouchableWithoutFeedback onPress={() => {
+                Keyboard.dismiss();
+                setModalVisible(false);
+            }}>
 
+                <KeyboardAvoidingView
+                    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                    style={{ flex: 1 }}
+                >
+                    <View className="flex-1 justify-center items-center mt-22">
+                        <TouchableWithoutFeedback onPress={() => { }}>
+                            <View
+                                style={styles.modalView}
+                            >
+                                <Text className="font-mbold text-lg">
+                                    {Title}
+                                </Text>
+                                {detail ? <Text className="font-mregular text-black text-sm mt-2">
+                                    {detail}
+                                </Text> : null}
+                                <TextInput
+                                    placeholder={placholder}
+                                    value={TextInputprops}
+                                    onChangeText={setTextInputprops}
+                                    multiline={true}
+                                    className="w-[300px] h-[100px] rounded-xl  bg-[#D9D9D9] font-mregular text-black p-2 mt-5"
+                                />
+
+                                <CustomButton
+                                    title="Valider"
+                                    handlePress={onSubmitPress}
+                                    containerStyles={`mt-4 border p-2 rounded-xl justify-center items-center bg-[#004AA6] w-36`}
+                                    textStyles="text-white font-mregular"
+                                    isLoading={false}
+                                />
+                            </View>
+                        </TouchableWithoutFeedback>
+                    </View>
+                </KeyboardAvoidingView>
+            </TouchableWithoutFeedback>
         </Modal >
     )
 }
@@ -43,7 +67,7 @@ const styles = StyleSheet.create({
         margin: 20,
         backgroundColor: 'white',
         borderRadius: 20,
-        padding: 35,
+        padding: 20,
         alignItems: 'center',
         shadowColor: '#000',
         shadowOffset: {
