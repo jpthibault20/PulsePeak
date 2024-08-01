@@ -7,7 +7,8 @@ const Setting = () => {
             <Text>
                 Setting page
             </Text>
-        </View>)
+        </View>
+    )
 }
 
 export default Setting

@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, ActivityIndicator, TouchableOpacity, Alert, StatusBar } from 'react-native'
+import { View, Text, ActivityIndicator, TouchableOpacity, Alert, StatusBar, Platform } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
 import { TextMe } from '../../assets/icons/svg/TextMe'
 import { useState, useEffect } from 'react'
@@ -63,7 +63,7 @@ export const TemplatePP = ({ isLoading }) => {
     }
 
     return (
-        <View className="w-full h-full bg-white">
+        <View className="w-full bg-white">
             <StatusBar barStyle="dark-content" />
             <TextInputComponent
                 modalVisible={modalVisible}
@@ -75,20 +75,20 @@ export const TemplatePP = ({ isLoading }) => {
                 setTextInputprops={setTextInput}
                 onSubmit={onSubmit}
             />
-            <View className="h-[58px]">
+            <View className={Platform.OS === 'android' ? 'h-[58px]' : 'h-[80px]'}>
                 <LinearGradient
                     colors={['#03BADB', '#0097B2', '#0552B1']}
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 0 }}
                     className="flex-1"
                 >
-                    <View className="flex-row justify-between items-center h-full">
-                        <View className="h-full flex items-center justify-center ml-2">
+                    <View className="flex-row justify-between items-end h-full">
+                        <View className="h-full flex items-center justify-end ml-2 mb-1">
                             {isLoading ? <ActivityIndicator size={40} color="#ffffff" /> : null}
                         </View>
 
                         <TouchableOpacity
-                            className="flex-row items-center space-x-2 mr-2"
+                            className="flex-row items-center space-x-2 mr-2 mb-3"
                             onPress={() => setModalVisible(true)}
                         >
                             <Text className="text-white text-xs font-mregular">
