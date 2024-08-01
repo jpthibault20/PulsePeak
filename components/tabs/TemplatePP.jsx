@@ -63,7 +63,7 @@ export const TemplatePP = ({ isLoading }) => {
     }
 
     return (
-        <View className="w-full h-full bg-red-100">
+        <View className="w-full h-full bg-white">
             <StatusBar barStyle="dark-content" />
             <TextInputComponent
                 modalVisible={modalVisible}
