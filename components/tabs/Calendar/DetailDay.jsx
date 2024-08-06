@@ -54,12 +54,12 @@ export const DetailDay = ({ selectedDay, calendar }) => {
                 ) : null}
 
                 {!result[0].Running && !result[0].Cycling && !result[0].Swimming ? (
-                    <ActivityWidth
-                        color="#999999"
-                        title="Repos"
-                        time=""
-                        icon={null}
-                    />
+                    <View className="items-center justify-center">
+                        <Text className="font-mregular text-base">
+                            Aucune activité
+                        </Text>
+                    </View>
+
                 ) : null}
 
 
