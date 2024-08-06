@@ -14,7 +14,7 @@ export const MonthlyView = ({ calendar, selectedDay, setSelectedDay }) => {
         <View className=" flex-row w-full justify-between px-2">
             {nameOfDay.map((dayName, index) => (
                 <View key={index} className="items-center">
-                    <Text className="font-mregular text-lg py-3">
+                    <Text className="font-mregular text-lg ">
                         {dayName}
                     </Text>
                     {daysGroupedByWeekday[dayName].map((event, dayIndex) => (
