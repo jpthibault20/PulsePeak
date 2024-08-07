@@ -6,7 +6,6 @@ import { CyclingIcon } from '../../../assets/icons/svg/CyclingIcon'
 
 export const ActivityWidthWeekly = ({ activity, event }) => {
 
-    console.log(activity)
     return (
         <View className={`border border-transparent h-[60px] w-[40px] rounded-lg items-center justify-center mt-3 
                             ${activity === "Swimming" && event.validated === null ? "bg-[#03BADB]" :
