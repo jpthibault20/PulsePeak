@@ -11,7 +11,7 @@ export const MonthlyView = ({ calendar, selectedDay, setSelectedDay }) => {
     const { nameOfDay, daysGroupedByWeekday } = splitPerDayMonth(calendar);
 
     return (
-        <View className=" flex-row w-full justify-between px-2">
+        <View className="flex-row w-full justify-between px-2">
             {nameOfDay.map((dayName, index) => (
                 <View key={index} className="items-center">
                     <Text className="font-mregular text-lg ">
