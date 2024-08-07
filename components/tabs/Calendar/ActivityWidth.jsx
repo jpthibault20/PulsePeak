@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 
 
-export const ActivityWidth = ({ color, title, time, icon }) => {
+export const ActivityWidth = ({ color, title, time, icon, activity }) => {
 
     return (
         <TouchableOpacity className={` bg-[${color}] w-full h-[50px] rounded-3xl flex flex-row justify-between items-center px-6 mb-2`}>

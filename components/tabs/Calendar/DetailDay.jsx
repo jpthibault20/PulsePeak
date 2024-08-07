@@ -31,6 +31,7 @@ export const DetailDay = ({ selectedDay, calendar }) => {
                         color="#03BADB"
                         title="Natation"
                         time="1h"
+                        activity={result[0]}
                         icon={<SwimmingIcon width={35} height={20} />}
                     />
                 ) : null}
@@ -40,6 +41,7 @@ export const DetailDay = ({ selectedDay, calendar }) => {
                         color="#0552B1"
                         title="Vélo"
                         time="3h"
+                        activity={result[0]}
                         icon={<CyclingIcon width={35} height={20} />}
                     />
                 ) : null}
@@ -49,6 +51,7 @@ export const DetailDay = ({ selectedDay, calendar }) => {
                         color="#7E57C2"
                         title="Course à pied"
                         time="20min"
+                        activity={result[0]}
                         icon={<RunningIcon width={35} height={20} />}
                     />
                 ) : null}
