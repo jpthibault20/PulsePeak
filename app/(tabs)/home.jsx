@@ -1,17 +1,28 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { View, Text, SafeAreaView, PanResponder } from 'react-native'
 import { TemplatePP } from '../../components/tabs/TemplatePP'
-import { generateCalendar } from '../../lib/calendar'
+import { generateCalendarMonthly } from '../../lib/calendar'
 import { SwitchView } from '../../components/tabs/Calendar/switch'
 import { MonthlyView } from '../../components/tabs/Calendar/MonthlyView'
 import { WeeklyView } from '../../components/tabs/Calendar/WeeklyView'
 import { DetailDay } from '../../components/tabs/Calendar/DetailDay'
+import { getMondayAndSunday } from '../../lib/calendar'
+import { generateCalendarWeekly } from '../../lib/calendar'
 
 const Home = () => {
     const [calendar, setCalendar] = useState([]);
     const [date, setDate] = useState(new Date());
-    const [switchValue, setSwitchValue] = useState("M");
+    const [switchView, setSwitchView] = useState("M");
     const [selectedDay, setSelectedDay] = useState(new Date(new Date().getTime() + 7200000));
+    const [title, setTitle] = useState("");
+
+    // useRef pour stocker switchView
+    const switchViewRef = useRef(switchView);
+
+    // useEffect pour mettre à jour le useRef lorsque switchView change
+    useEffect(() => {
+        switchViewRef.current = switchView;
+    }, [switchView]);
 
     const panResponder = useRef(
         PanResponder.create({
@@ -22,7 +33,7 @@ const Home = () => {
                 if (gestureState.dx < -50) {
                     setDate(prevDate => {
                         const newDate = new Date(prevDate);
-                        newDate.setMonth(newDate.getMonth() + 1);
+                        switchViewRef.current === "M" ? newDate.setMonth(newDate.getMonth() + 1) : newDate.setDate(newDate.getDate() + 7);
                         return newDate;
                     })
                 }
@@ -30,7 +41,7 @@ const Home = () => {
                 else if (gestureState.dx > 50) {
                     setDate(prevDate => {
                         const newDate = new Date(prevDate);
-                        newDate.setMonth(newDate.getMonth() - 1);
+                        switchViewRef.current === "M" ? newDate.setMonth(newDate.getMonth() - 1) : newDate.setDate(newDate.getDate() - 7);
                         return newDate;
                     })
                 }
@@ -39,8 +50,17 @@ const Home = () => {
     ).current;
 
     useEffect(() => {
-        setCalendar(generateCalendar(date.getFullYear(), date.getMonth()));
-    }, [date]);
+        if (switchView === "M") {
+            setCalendar(generateCalendarMonthly(date.getFullYear(), date.getMonth()));
+            setTitle(date.toLocaleString('fr-FR', { month: 'long' }) + ", " + date.toLocaleString('fr-FR', { year: 'numeric' }));
+        }
+        else if (switchView === "W") {
+            setCalendar(generateCalendarWeekly(date.getFullYear(), date.getMonth(), date.getDate()));
+            // console.log(calendar)
+            const { monday, sunday } = getMondayAndSunday(date);
+            setTitle(monday + " - " + sunday + " " + date.toLocaleString('fr-FR', { month: 'long' }) + " " + date.toLocaleString('fr-FR', { year: 'numeric' }));
+        }
+    }, [switchView, date]);
 
 
     return (
@@ -51,29 +71,31 @@ const Home = () => {
                 <View className="flex flex-row justify-between items-center p-6">
                     <View>
                         <Text className="font-mregular text-xl">
-                            {date.toLocaleString('fr-FR', { month: 'long' })}, {date.toLocaleString('fr-FR', { year: 'numeric' })}
+                            {title}
                         </Text>
                     </View>
                     <View>
-                        <SwitchView switchValue={switchValue} setSwitchValue={setSwitchValue} />
+                        <SwitchView switchValue={switchView} setSwitchValue={setSwitchView} />
                     </View>
                 </View>
 
                 <View className="w-full">
-                    {switchValue === "M" ?
+                    {switchView === "M" ?
                         <MonthlyView
                             calendar={calendar}
                             selectedDay={selectedDay}
                             setSelectedDay={setSelectedDay}
                         />
                         :
-                        <WeeklyView calendar={calendar} />}
+                        <WeeklyView
+                            calendar={calendar}
+                            selectedDay={selectedDay}
+                            setSelectedDay={setSelectedDay}
+                            date={date}
+                        />
+                    }
                 </View>
 
-                {/* View intermédiaire pour pousser la dernière view vers le bas */}
-                {/* <View className="flex-1 " /> */}
-
-                {/* Dernière View toujours en bas */}
                 <View className="items-center flex-1 justify-end mb-3">
                     <View className="border rounded-xl w-[65px] bg-[#0552B1] border-[#0552B1]" />
                 </View>

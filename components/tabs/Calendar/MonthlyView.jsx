@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text } from 'react-native'
-import { splitPerDay } from '../../../lib/calendar'
+import { splitPerDayMonth } from '../../../lib/calendar'
 import { Day } from './Day'
 
 
@@ -8,7 +8,7 @@ import { Day } from './Day'
 
 
 export const MonthlyView = ({ calendar, selectedDay, setSelectedDay }) => {
-    const { nameOfDay, daysGroupedByWeekday } = splitPerDay(calendar);
+    const { nameOfDay, daysGroupedByWeekday } = splitPerDayMonth(calendar);
 
     return (
         <View className=" flex-row w-full justify-between px-2">
