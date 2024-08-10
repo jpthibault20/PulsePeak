@@ -23,7 +23,7 @@
     "expo-status-bar": "~1.12.1",
     "lucide-react": "^0.399.0",
     "nativewind": "^2.0.11",
-    "npx": "^10.2.2",
+    "npx": "^3.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.74.2",
